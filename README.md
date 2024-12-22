@@ -1,75 +1,13 @@
-# Nuxt Minimal Starter
+# Rosalana Support (Frontend)
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+![Static Badge](https://img.shields.io/badge/ROSALANA-blue?style=for-the-badge)
 
-## Setup
+**Rosalana Support** představuje místo pro získání podpory a pomoci s produkty v ekosystému Rosalana. Uživatel si může vybrat s kterým produktem má problém a následně se mu zobrazí nápověda a možnost kontaktovat podporu. 
 
-Make sure to install dependencies:
+Posílání zpráv a dalších oznámení je zajištěno pomocí **Rosalana Notifications** modulu, jakožto jednotného modulu pro oznámení v ekosystému.
 
-```bash
-# npm
-npm install
+> Představuje ukázku implementace frontendu pro Rosalana Accounts. 
 
-# pnpm
-pnpm install
+## Funkce
 
-# yarn
-yarn install
-
-# bun
-bun install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+Kromě zákaznické podpory slouží jako jednotné Admin Centrum napříč všemi produkty Rosalana. Fetchuje veřejné API z aplikací a je možné s nimi manipulovat. Tato funkce je přístupná pouze pro Admin uživatele. Admin uživatelé jsou uloženi v lokální databázi na Rosalana Support serveru. Tato databáze je synchronizována s Rosalana Accounts. Jedná se pouze o přiřazení role, což ukazuje krásnou implementaci mezi surovými daty v Accounts a vlastní logikou v konkrétní aplikaci.
