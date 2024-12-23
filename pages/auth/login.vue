@@ -66,22 +66,22 @@
     }
   };
 
-  onMounted(async () => {
-    const raToken = useCookie("RA-TOKEN").value as string;
-    try {
-      const response = await $fetch("/user", {
-        method: "GET",
-        credentials: "include",
-        baseURL: "http://localhost:8001",
-        headers: {
-          Accept: "application/json",
-          Authorization: `Bearer ${raToken}`,
-        },
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  });
+//   onMounted(async () => {
+//     const raToken = useCookie("RA-TOKEN").value as string;
+//     try {
+//       const response = await $fetch("/user", {
+//         method: "GET",
+//         credentials: "include",
+//         baseURL: "http://localhost:8001",
+//         headers: {
+//           Accept: "application/json",
+//           Authorization: `Bearer ${raToken}`,
+//         },
+//       });
+//     } catch (error) {
+//       console.error(error);
+//     }
+//   });
 
   //   onMounted(async () => {
   //     try {
