@@ -1,9 +1,6 @@
 <template>
   <div>
-    <div class="relative mt-3 rounded-xl border">
-      <div
-        class="absolute h-full w-full bg-[radial-gradient(#fecdd3_1px,transparent_1px)] [background-size:16px_16px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)]"
-      ></div>
+    <div class="relative mt-3 rounded-xl border" style="background-image: url('/images/banner.jpg'); background-size: cover;">
       <div class="relative z-50 flex h-20 w-full items-center justify-between px-4 sm:px-8">
         <AppLogo />
 
@@ -17,7 +14,7 @@
           <UiButton size="sm">Sign In</UiButton>
         </div>
       </div>
-      <div class="relative z-10 text-center flex flex-col items-center justify-center pb-16 pt-12">
+      <div class="relative z-10 text-center flex flex-col items-center text-white justify-center pb-16 pt-12">
         <slot name="banner" />
       </div>
     </div>

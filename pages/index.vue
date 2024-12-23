@@ -2,19 +2,42 @@
   useHead({
     title: "Home",
   });
+
+  const accordionItems = [
+    {
+      value: "item-1",
+      title: "What is Rosalana?",
+      content: "Rosalana is a platform that unites aplications and software under one hud. It provides a wide range of tools and features that help you manage your projects and enhance your creativity.",
+    },
+    {
+      value: "item-2",
+      title: "Why other aplications say that I already have an account?",
+      content: "In Rosalana eco-system, you stick with one account. You can use the same account to access all aplications. We already know you, so why create another account right? That just makes things complicated 😊",
+    },
+    {
+      value: "item-3",
+      title: "Can I participate in the development of Rosalana?",
+      content: "First of all, wait! Are you willing to work for free? Hah that was a hitch right? 😃. We are always open to new ideas and suggestions. If you have any, feel free to ring us up.",
+    },
+  ];
 </script>
 <template>
   <NuxtLayout name="main">
     <template #banner>
-      <h1 class="text-3xl mb-3 font-bold text-zinc-800">Support & Documentation</h1>
-      <p class="text-xs text-rose-500">
+      <h1 class="mb-3 text-3xl font-bold">Support & Documentation</h1>
+      <p class="text-xs">
         Need help with something? Check out our most frequently asked questions.
       </p>
-      <input
-        type="text"
-        placeholder="Search"
-        class="mt-3 rounded-full border border-rose-200 bg-transparent p-1 px-2"
-      />
+
+      <div class="mt-6 flex items-center rounded-md border border-input bg-background px-3">
+        <Icon name="lucide:search" class="h-4 w-4 text-rose-500" />
+        <UiInput
+          class="w-max border-none text-zinc-800 focus-visible:outline-none focus-visible:ring-transparent focus-visible:ring-offset-0"
+          placeholder="Search"
+          icon="lucide:search"
+          variant="secondary"
+        />
+      </div>
     </template>
 
     <h2 class="mt-12 text-2xl font-bold text-zinc-800">Aplications</h2>
@@ -38,8 +61,29 @@
         description="a CMS system designed based on a single central administration"
         icon="custom:proxyma-logo"
       />
+      <UiCard
+        class="flex justify-center text-center"
+        title="S Transfer"
+        description="a platform that lets you transfer files between devices"
+        icon="custom:transfer-logo"
+      />
     </div>
 
     <h2 class="mt-12 text-2xl font-bold text-zinc-800">General FAQs</h2>
+
+    <UiAccordion type="single" default-value="item-2" :items="accordionItems">
+      <template #trigger="{ open, item }">
+        <UiAccordionTrigger
+          class="text-left text-sm"
+          :class="[open && 'underline underline-offset-2']"
+          :title="item.title"
+        >
+          <template #icon>
+            <Icon v-if="!open" name="lucide:plus" class="size-4 shrink-0" />
+            <Icon v-else name="lucide:minus" class="size-4 shrink-0" />
+          </template>
+        </UiAccordionTrigger>
+      </template>
+    </UiAccordion>
   </NuxtLayout>
 </template>
