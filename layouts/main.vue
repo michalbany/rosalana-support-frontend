@@ -26,6 +26,7 @@
         <slot name="banner" />
       </div>
     </div>
+    <UiButton @click="navigateTo('/admin')">Admin</UiButton>
     <div class="mt-12">
       <slot />
     </div>

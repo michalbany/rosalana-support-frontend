@@ -1,7 +1,7 @@
 /**
  * Middleware pro routy
  */
-export default defineNuxtRouteMiddleware((to, from) => {
+export default defineNuxtRouteMiddleware((to) => {
   // Pravidla pro jednotlivé routy
   const routes: Record<string, Array<() => any>> = {
     "/auth/*": [guest],
