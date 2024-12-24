@@ -1,4 +1,9 @@
+const useUser = () => useState<any | null>("user", () => null)
+
 export function useAuth() {
+
+  const user = useUser();
+
   async function login(credentials: { email: string; password: string }) {
     await csrf();
     const xsrfValue = useCookie("XSRF-TOKEN").value as string;
@@ -14,8 +19,11 @@ export function useAuth() {
         body: JSON.stringify(credentials),
       });
 
+      user.value = response;
+
       return [true, response];
     } catch (error) {
+      user.value = null;
       return [false, error];
     }
   }
@@ -34,6 +42,7 @@ export function useAuth() {
         },
       });
 
+      user.value = null;
       return [true, response];
     } catch (error) {
       return [false, error];
@@ -60,8 +69,10 @@ export function useAuth() {
         body: JSON.stringify(credentials),
       });
 
+      user.value = response;
       return [true, response];
     } catch (error) {
+      user.value = null;
       return [false, error];
     }
   }
@@ -86,5 +97,6 @@ export function useAuth() {
     logout,
     register,
     csrf,
+    user,
   };
 }

@@ -17,9 +17,21 @@
     const [status, response] = await useAuth().register(form);
     pending.value = false;
     if (status) {
-      navigateTo("/");
+      if (lastVisited) {
+        navigateTo(lastVisited);
+      } else {
+        navigateTo("/");
+      }
     }
   };
+
+  let lastVisited: string | undefined;
+
+  onMounted(() => {
+    if (import.meta.client && typeof localStorage !== "undefined") {
+      lastVisited = useActivity().activity().last()?.path;
+    }
+  });
 </script>
 <template>
   <NuxtLayout name="auth">

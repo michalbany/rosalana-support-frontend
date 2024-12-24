@@ -27,6 +27,8 @@
       </div>
     </div>
     <UiButton @click="navigateTo('/admin')">Admin</UiButton>
+
+    <p>{{ useAuth().user }}</p>
     <div class="mt-12">
       <slot />
     </div>
