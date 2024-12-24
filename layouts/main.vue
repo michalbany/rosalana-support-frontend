@@ -13,7 +13,7 @@
           </UiButton>
         </div>
         <div v-if="!useAuth().autentificated()" class="hidden items-center gap-4 sm:flex">
-          <UiButton size="sm" variant="secondary">Sign Up</UiButton>
+          <UiButton size="sm" variant="secondary" @click="navigateTo('/auth/register')">Sign Up</UiButton>
           <UiButton size="sm" @click="navigateTo('/auth/login')">Sign In</UiButton>
         </div>
         <div v-else class="hidden items-center gap-4 sm:flex">

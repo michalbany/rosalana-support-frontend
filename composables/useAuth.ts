@@ -3,7 +3,7 @@ export function useAuth() {
     await csrf();
     const xsrfValue = useCookie("XSRF-TOKEN").value as string;
     try {
-      await $fetch("/login", {
+      const response = await $fetch("/login", {
         method: "POST",
         credentials: "include",
         baseURL: "http://localhost:8001",
@@ -13,8 +13,10 @@ export function useAuth() {
         },
         body: JSON.stringify(credentials),
       });
+
+      return [true, response];
     } catch (error) {
-      console.error(error);
+      return [false, error];
     }
   }
 
@@ -22,7 +24,7 @@ export function useAuth() {
     await csrf();
     const xsrfValue = useCookie("XSRF-TOKEN").value as string;
     try {
-      await $fetch("/logout", {
+      const response = await $fetch("/logout", {
         method: "POST",
         credentials: "include",
         baseURL: "http://localhost:8001",
@@ -31,8 +33,36 @@ export function useAuth() {
           "X-XSRF-TOKEN": xsrfValue,
         },
       });
+
+      return [true, response];
     } catch (error) {
-      console.error(error);
+      return [false, error];
+    }
+  }
+
+  async function register(credentials: {
+    name: string;
+    email: string;
+    password: string;
+    password_confirmation: string;
+  }) {
+    await csrf();
+    const xsrfValue = useCookie("XSRF-TOKEN").value as string;
+    try {
+      const response = await $fetch("/register", {
+        method: "POST",
+        credentials: "include",
+        baseURL: "http://localhost:8001",
+        headers: {
+          Accept: "application/json",
+          "X-XSRF-TOKEN": xsrfValue,
+        },
+        body: JSON.stringify(credentials),
+      });
+
+      return [true, response];
+    } catch (error) {
+      return [false, error];
     }
   }
 
@@ -54,6 +84,7 @@ export function useAuth() {
     },
     login,
     logout,
+    register,
     csrf,
   };
 }

@@ -8,9 +8,15 @@
     password: "",
   });
 
-  const submit = () => {
-    useAuth().login(form);
-    navigateTo("/");
+  const pending = ref(false);
+
+  const submit = async () => {
+    pending.value = true;
+    const [status, response] = await useAuth().login(form);
+    pending.value = false;
+    if (status) {
+      navigateTo("/");
+    }
   };
 </script>
 <template>
@@ -34,8 +40,16 @@
         >
       </div>
 
-      <UiButton type="submit">Login</UiButton>
-    </form>
+      <UiButton type="submit" :disabled="pending">Login</UiButton>
 
+      <UiButton
+        type="button"
+        variant="link"
+        size="sm"
+        class="h-auto p-0 text-xs"
+        @click="navigateTo('/auth/register')"
+        >Don't have an account?</UiButton
+      >
+    </form>
   </NuxtLayout>
 </template>
