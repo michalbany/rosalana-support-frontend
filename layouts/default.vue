@@ -15,8 +15,8 @@ const apps = [
 ]
 </script>
 <template>
-  <div class="selection:bg-action/40 flex flex-col min-h-screen bg-zinc-50 dark:bg-zinc-900 dark:text-white text-zinc-800">
-    <div class="mx-auto flex max-w-[1200px] grow flex-col px-6">
+  <div class="selection:bg-primary selection:text-white flex flex-col min-h-screen bg-zinc-50 dark:bg-zinc-900 dark:text-white text-zinc-800">
+    <div class="mx-auto flex max-w-[1200px] grow flex-col px-6 w-full">
       <slot />
     </div>
 

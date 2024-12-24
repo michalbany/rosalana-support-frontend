@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="w-full">
     <div
-      class="relative mt-3 rounded-xl border"
+      class="relative mt-3 rounded-xl border w-full"
       style="background-image: url(&quot;/images/banner.jpg&quot;); background-size: cover"
     >
       <div class="relative z-50 flex h-20 w-full items-center justify-between px-4 sm:px-8">
@@ -71,7 +71,7 @@
         </div>
       </div>
       <div
-        class="relative z-10 flex flex-col items-center justify-center pb-16 pt-12 text-center text-white"
+        class="relative z-10 flex flex-col items-center justify-center text-center text-white"
       >
         <slot name="banner" />
       </div>

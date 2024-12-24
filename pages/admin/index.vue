@@ -1,3 +1,4 @@
 <template>
-    hello from admin
+    <NuxtLayout name="main">
+    </NuxtLayout>
 </template>
