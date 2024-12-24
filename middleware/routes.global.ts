@@ -5,7 +5,7 @@ export default defineNuxtRouteMiddleware((to) => {
   // Pravidla pro jednotlivé routy
   const routes: Record<string, Array<() => any>> = {
     "/auth/*": [guest],
-    "/admin/*": [auth],
+    "/admin/*": [auth, admin],
   };
 
   const matchedRoute = Object.keys(routes).find((route) => routeMatch(route, to.path));
@@ -28,5 +28,11 @@ function guest() {
 function auth() {
   if (!useAuth().autentificated()) {
     return navigateTo("/auth/login");
+  }
+}
+
+function admin() {
+  if (!useAuth().user.value?.is_admin) {
+    return navigateTo("/");
   }
 }

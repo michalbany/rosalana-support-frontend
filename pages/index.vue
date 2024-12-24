@@ -32,7 +32,7 @@
       <div class="mt-6 flex items-center rounded-md border border-input bg-background px-3">
         <Icon name="lucide:search" class="h-4 w-4 text-rose-500" />
         <UiInput
-          class="w-max border-none text-zinc-800 dark:text-white focus-visible:bg-background"
+          class="w-max border-none text-zinc-800 dark:text-white focus-visible:bg-background dark:focus-visible:bg-background"
           placeholder="Search"
           icon="lucide:search"
           variant="secondary"
