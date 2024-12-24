@@ -51,6 +51,7 @@
               />
               <UiDropdownMenuItem
                 title="Admin"
+                v-if="useAuth().user.value?.is_admin"
                 @click="navigateTo('/admin')"
                 class="cursor-pointer"
                 icon="lucide:pencil-ruler"
