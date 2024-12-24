@@ -4,12 +4,13 @@
 export default defineNuxtRouteMiddleware((to, from) => {
   // Pravidla pro jednotlivé routy
   const routes: Record<string, Array<() => any>> = {
-    "/auth/login": [guest],
-    "/auth/register": [guest],
+    "/auth/*": [guest],
+    "/admin/*": [auth],
   };
 
-  if (routes[to.path]) {
-    for (const ruleFn of routes[to.path]) {
+  const matchedRoute = Object.keys(routes).find((route) => routeMatch(route, to.path));
+  if (matchedRoute) {
+    for (const ruleFn of routes[matchedRoute]) {
       const result = ruleFn();
       if (result) {
         return result;
