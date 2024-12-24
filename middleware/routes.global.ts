@@ -19,19 +19,13 @@ export default defineNuxtRouteMiddleware((to, from) => {
 });
 
 function guest() {
-  // Tady bys ověřil, zda je user přihlášen (např. check cookie, store, cokoliv)
-  const isLoggedIn = false; // dummy
-
-  if (isLoggedIn) {
+  if (useAuth().autentificated()) {
     return navigateTo("/");
   }
 }
 
 function auth() {
-  const isLoggedIn = false; // dummy
-
-  if (!isLoggedIn) {
-    // Přesměrování, pokud user není lognutý
+  if (!useAuth().autentificated()) {
     return navigateTo("/auth/login");
   }
 }
