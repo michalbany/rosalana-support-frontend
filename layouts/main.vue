@@ -1,6 +1,3 @@
-<script setup lang="ts">
-  const loggedIn = useAuth().autentificated();
-</script>
 <template>
   <div>
     <div
@@ -15,7 +12,7 @@
             <Icon name="lucide:menu" class="h-4 w-4" />
           </UiButton>
         </div>
-        <div v-if="!loggedIn" class="hidden items-center gap-4 sm:flex">
+        <div v-if="!useAuth().autentificated()" class="hidden items-center gap-4 sm:flex">
           <UiButton size="sm" variant="secondary">Sign Up</UiButton>
           <UiButton size="sm" @click="navigateTo('/auth/login')">Sign In</UiButton>
         </div>

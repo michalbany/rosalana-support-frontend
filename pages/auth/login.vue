@@ -10,6 +10,7 @@
 
   const submit = () => {
     useAuth().login(form);
+    navigateTo("/");
   };
 </script>
 <template>
