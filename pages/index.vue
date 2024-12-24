@@ -32,7 +32,7 @@
       <div class="mt-6 flex items-center rounded-md border border-input bg-background px-3">
         <Icon name="lucide:search" class="h-4 w-4 text-rose-500" />
         <UiInput
-          class="w-max border-none text-zinc-800 focus-visible:bg-background"
+          class="w-max border-none text-zinc-800 dark:text-white focus-visible:bg-background"
           placeholder="Search"
           icon="lucide:search"
           variant="secondary"
@@ -40,7 +40,7 @@
       </div>
     </template>
 
-    <h2 class="mt-12 text-2xl font-bold text-zinc-800">Aplications</h2>
+    <h2 class="mt-12 text-2xl font-bold text-zinc-800 dark:text-white">Aplications</h2>
 
     <div class="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
       <UiCard
@@ -69,7 +69,7 @@
       />
     </div>
 
-    <h2 class="mt-12 text-2xl font-bold text-zinc-800">General FAQs</h2>
+    <h2 class="mt-12 text-2xl font-bold text-zinc-800 dark:text-white">General FAQs</h2>
 
     <UiAccordion type="single" default-value="item-2" :items="accordionItems">
       <template #trigger="{ open, item }">

@@ -15,7 +15,7 @@ const apps = [
 ]
 </script>
 <template>
-  <div class="selection:bg-action/40 flex flex-col min-h-screen bg-zinc-50 text-zinc-800">
+  <div class="selection:bg-action/40 flex flex-col min-h-screen bg-zinc-50 dark:bg-zinc-900 dark:text-white text-zinc-800">
     <div class="mx-auto flex max-w-[1200px] grow flex-col px-6">
       <slot />
     </div>
@@ -37,7 +37,7 @@ const apps = [
           <div class="flex flex-col gap-2 items-start">
             <p class="text-sm text-zinc-600 sm:max-w-[250px] max-w-max dark:text-zinc-400">Stuck on a problem? Get in touch with us and we'll help you out.</p>
             <UiButton size="sm" class="mb-1"> Send us a message</UiButton>
-            <span class="text-sm">Made with <Icon name="solar:heart-bold" class="size-4 text-red-500 align-middle" /> by <UiButton variant="link" href="https://github.com/michalbany" target="_blank" class="text-zinc-600 p-0 h-auto inline-flex dark:text-zinc-400">Michael Bany</UiButton></span>
+            <span class="text-sm dark:text-zinc-500">Made with <Icon name="solar:heart-bold" class="size-4 text-red-500 align-middle" /> by <UiButton variant="link" href="https://github.com/michalbany" target="_blank" class="text-zinc-600 p-0 h-auto inline-flex dark:text-zinc-400">Michael Bany</UiButton></span>
           </div>
         </div>
         <div class="container mx-auto py-4 text-center text-zinc-600 dark:text-zinc-300">

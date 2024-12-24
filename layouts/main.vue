@@ -24,7 +24,6 @@
               <UiAvatar
                 :fallback="inicials(useAuth().user.value?.name)"
                 class="h-12 w-12 cursor-pointer"
-                fallbackClass="bg-white"
               />
             </UiDropdownMenuTrigger>
             <UiDropdownMenuContent class="mr-8 w-36">
