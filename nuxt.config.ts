@@ -23,11 +23,12 @@ export default defineNuxtConfig({
     editorSupport: true,
   },
 
+  ssr: false,
+
   colorMode: {
     classSuffix: "",
   },
   icon: {
-    provider: "server",
     customCollections: [{
       prefix: "custom",
       dir: "./assets/icons",

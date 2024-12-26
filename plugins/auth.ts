@@ -2,6 +2,7 @@ import type { ApiResponse } from "~/types";
 
 export default defineNuxtPlugin(async (nuxtApp) => {
   const { user } = useAuth();
+  const baseURL = useRuntimeConfig().public.apiBaseUrl;
 
   user.value = null;
 
@@ -10,7 +11,7 @@ export default defineNuxtPlugin(async (nuxtApp) => {
     const response = await $fetch<ApiResponse>("/me", {
       method: "GET",
       credentials: "include",
-      baseURL: "http://localhost:8001",
+      baseURL: baseURL,
       headers: { Accept: "application/json" },
     });
 

@@ -6,6 +6,8 @@ export function useAuth() {
 
   const user = useUser();
 
+  const baseURL = useRuntimeConfig().public.apiBaseUrl;
+
   async function login(credentials: { email: string; password: string }) {
     await csrf();
     const xsrfValue = useCookie("XSRF-TOKEN").value as string;
@@ -13,7 +15,7 @@ export function useAuth() {
       const response = await $fetch<ApiResponse>("/login", {
         method: "POST",
         credentials: "include",
-        baseURL: "http://localhost:8001",
+        baseURL: baseURL,
         headers: {
           Accept: "application/json",
           "X-XSRF-TOKEN": xsrfValue,
@@ -37,7 +39,7 @@ export function useAuth() {
       const response = await $fetch<ApiResponse>("/logout", {
         method: "POST",
         credentials: "include",
-        baseURL: "http://localhost:8001",
+        baseURL: baseURL,
         headers: {
           Accept: "application/json",
           "X-XSRF-TOKEN": xsrfValue,
@@ -63,7 +65,7 @@ export function useAuth() {
       const response = await $fetch<ApiResponse>("/register", {
         method: "POST",
         credentials: "include",
-        baseURL: "http://localhost:8001",
+        baseURL: baseURL,
         headers: {
           Accept: "application/json",
           "X-XSRF-TOKEN": xsrfValue,
@@ -84,7 +86,7 @@ export function useAuth() {
       await $fetch("sanctum/csrf-cookie", {
         method: "GET",
         credentials: "include",
-        baseURL: "http://localhost:8001",
+        baseURL: baseURL,
       });
     } catch (error) {
       console.error(error);
