@@ -1,3 +1,5 @@
+import type { ApiResponse } from "~/types/Api";
+
 const useUser = () => useState<any | null>("user", () => null)
 
 export function useAuth() {
@@ -8,7 +10,7 @@ export function useAuth() {
     await csrf();
     const xsrfValue = useCookie("XSRF-TOKEN").value as string;
     try {
-      const response = await $fetch("/login", {
+      const response = await $fetch<ApiResponse>("/login", {
         method: "POST",
         credentials: "include",
         baseURL: "http://localhost:8001",
@@ -19,8 +21,8 @@ export function useAuth() {
         body: JSON.stringify(credentials),
       });
 
-      user.value = response;
-
+      user.value = response.data;
+      
       return [true, response];
     } catch (error) {
       user.value = null;
@@ -32,7 +34,7 @@ export function useAuth() {
     await csrf();
     const xsrfValue = useCookie("XSRF-TOKEN").value as string;
     try {
-      const response = await $fetch("/logout", {
+      const response = await $fetch<ApiResponse>("/logout", {
         method: "POST",
         credentials: "include",
         baseURL: "http://localhost:8001",
@@ -58,7 +60,7 @@ export function useAuth() {
     await csrf();
     const xsrfValue = useCookie("XSRF-TOKEN").value as string;
     try {
-      const response = await $fetch("/register", {
+      const response = await $fetch<ApiResponse>("/register", {
         method: "POST",
         credentials: "include",
         baseURL: "http://localhost:8001",
@@ -69,7 +71,7 @@ export function useAuth() {
         body: JSON.stringify(credentials),
       });
 
-      user.value = response;
+      user.value = response.data;
       return [true, response];
     } catch (error) {
       user.value = null;
