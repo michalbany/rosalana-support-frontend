@@ -1,3 +1,5 @@
+import type { ApiResponse } from "~/types";
+
 export default defineNuxtPlugin(async (nuxtApp) => {
   const { user } = useAuth();
 
@@ -5,14 +7,14 @@ export default defineNuxtPlugin(async (nuxtApp) => {
 
   try {
     // Můžeš i rovnou useAuth().csrf() pokud je potřeba
-    const response = await $fetch("/me", {
+    const response = await $fetch<ApiResponse>("/me", {
       method: "GET",
       credentials: "include",
       baseURL: "http://localhost:8001",
       headers: { Accept: "application/json" },
     });
 
-    user.value = response;
+    user.value = response.data;
   } catch (error) {
     user.value = null;
   }
