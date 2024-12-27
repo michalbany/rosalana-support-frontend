@@ -46,7 +46,7 @@
   };
 
   const config = useRuntimeConfig();
-  const { data: apps } = await useFetch<ApiResponse>("/apps", {
+  const { data: apps } = await useFetch("/apps", {
     method: "GET",
     credentials: "include",
     baseURL: config.public.apiBaseUrl,

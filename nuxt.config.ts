@@ -9,6 +9,7 @@ export default defineNuxtConfig({
     "@vueuse/nuxt",
     "@nuxt/icon",
     "@nuxt/fonts",
+    '@pinia/nuxt',
   ],
 
   runtimeConfig: {
@@ -28,6 +29,7 @@ export default defineNuxtConfig({
   colorMode: {
     classSuffix: "",
   },
+
   icon: {
     customCollections: [{
       prefix: "custom",
@@ -36,16 +38,21 @@ export default defineNuxtConfig({
   },
 
   imports: {
-    imports: [
-      {
-        from: "tailwind-variants",
-        name: "tv",
-      },
-      {
-        from: "tailwind-variants",
-        name: "VariantProps",
-        type: true,
-      },
-    ],
+    imports: [{
+      from: "tailwind-variants",
+      name: "tv",
+    }, {
+      from: "tailwind-variants",
+      name: "VariantProps",
+      type: true,
+    }, {
+      from: "vue-sonner",
+      name: "toast",
+      as: "useSonner"
+    }],
   },
+
+  build: {
+    transpile: ["vue-sonner"]
+  }
 });

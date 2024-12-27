@@ -9,34 +9,25 @@ export function useAuth() {
   const baseURL = useRuntimeConfig().public.apiBaseUrl;
 
   async function login(credentials: { email: string; password: string }) {
-    await csrf();
-    const xsrfValue = useCookie("XSRF-TOKEN").value as string;
-    try {
-      const response = await $fetch<ApiResponse>("/login", {
-        method: "POST",
-        credentials: "include",
-        baseURL: baseURL,
-        headers: {
-          Accept: "application/json",
-          "X-XSRF-TOKEN": xsrfValue,
-        },
-        body: JSON.stringify(credentials),
-      });
-
-      user.value = response.data;
-      
-      return [true, response];
-    } catch (error) {
-      user.value = null;
-      return [false, error];
-    }
+    return await useApiRuntime('/login', {
+      store: false,
+      method: "POST",
+      body: JSON.stringify(credentials),
+      onResponse: ({ response }) => {
+        user.value = response._data.data;
+        useSonner.success(response._data.message);
+      },
+      onResponseError: ({ response }) => {
+        user.value = null;
+      }
+    });
   }
 
   async function logout() {
     await csrf();
     const xsrfValue = useCookie("XSRF-TOKEN").value as string;
     try {
-      const response = await $fetch<ApiResponse>("/logout", {
+      const response = await $fetch("/logout", {
         method: "POST",
         credentials: "include",
         baseURL: baseURL,
@@ -62,26 +53,26 @@ export function useAuth() {
     password: string;
     password_confirmation: string;
   }) {
-    await csrf();
-    const xsrfValue = useCookie("XSRF-TOKEN").value as string;
-    try {
-      const response = await $fetch<ApiResponse>("/register", {
-        method: "POST",
-        credentials: "include",
-        baseURL: baseURL,
-        headers: {
-          Accept: "application/json",
-          "X-XSRF-TOKEN": xsrfValue,
-        },
-        body: JSON.stringify(credentials),
-      });
+    // await csrf();
+    // const xsrfValue = useCookie("XSRF-TOKEN").value as string;
+    // try {
+    //   const response = await $fetch<ApiResponse>("/register", {
+    //     method: "POST",
+    //     credentials: "include",
+    //     baseURL: baseURL,
+    //     headers: {
+    //       Accept: "application/json",
+    //       "X-XSRF-TOKEN": xsrfValue,
+    //     },
+    //     body: JSON.stringify(credentials),
+    //   });
 
-      user.value = response.data;
-      return [true, response];
-    } catch (error) {
-      user.value = null;
-      return [false, error];
-    }
+    //   user.value = response.data;
+    //   return [true, response];
+    // } catch (error) {
+    //   user.value = null;
+    //   return [false, error];
+    // }
   }
 
   async function csrf() {

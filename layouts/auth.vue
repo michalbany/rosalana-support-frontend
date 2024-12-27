@@ -7,7 +7,7 @@
     <div class="text-white mb-5">
         <slot name="title" />
     </div>
-      <div class="rounded-lg bg-white dark:bg-zinc-900 dark:text-white p-8 sm:min-w-[350px]">
+      <div class="rounded-lg bg-white dark:bg-zinc-900 dark:text-white p-8 sm:w-[350px]">
         <slot />
       </div>
     </div>

@@ -13,7 +13,7 @@ useHead({
     <NuxtRouteAnnouncer />
     <NuxtLayout>
       <NuxtPage />
-      <!-- <UiVueSonner /> -->
+      <UiVueSonner />
     </NuxtLayout>
   </div>
 </template>
