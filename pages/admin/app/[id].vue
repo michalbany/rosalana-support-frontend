@@ -2,7 +2,7 @@
   import type { ApiResponse } from "~/types";
 
   const config = useRuntimeConfig();
-  const { data: app } = await useFetch<ApiResponse>("/apps/" + useRoute().params.id, {
+  const { data: app } = await useFetch<any>("/apps/" + useRoute().params.id, {
     method: "GET",
     credentials: "include",
     baseURL: config.public.apiBaseUrl,
