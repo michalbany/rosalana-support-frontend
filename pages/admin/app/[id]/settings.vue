@@ -2,6 +2,7 @@
   const { data: app } = await useApi<any>("/apps/" + useRoute().params.id, {
     method: "GET",
     fatal: true,
+    store: true,
   });
 
   useHead({
