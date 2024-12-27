@@ -5,6 +5,11 @@
 
   const { data: apps } = await useApi<any>("/apps", {
     method: "GET",
+    fatal: true,
+  });
+
+  const computedApps = computed(() => {
+    return apps.value.filter((app: any) => app.active).slice(0, 4);
   });
 </script>
 <template>
@@ -39,7 +44,7 @@
     <div class="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
       <UiCard
         class="flex justify-center text-center"
-        v-for="(app, i) in apps"
+        v-for="(app, i) in computedApps"
         :key="i"
         :title="app.name"
         :description="app.description"
@@ -48,5 +53,6 @@
         @click="navigateTo('/admin/app/' + app.id)"
       />
     </div>
+    <UiButton size="sm" variant="link" @click="navigateTo('/admin/app')"> View All </UiButton>
   </NuxtLayout>
 </template>

@@ -1,23 +1,20 @@
 <script setup lang="ts">
-  import type { ApiResponse } from "~/types";
-
-  const config = useRuntimeConfig();
-  const { data: app } = await useFetch<any>("/apps/" + useRoute().params.id, {
+  const { data: app } = await useApi<any>("/apps/" + useRoute().params.id, {
     method: "GET",
-    credentials: "include",
-    baseURL: config.public.apiBaseUrl,
-    headers: {
-      Accept: "application/json",
-    },
+    fatal: true,
+  });
+
+  useHead({
+    title: app?.value.name,
   });
 </script>
 <template>
   <NuxtLayout name="main">
     <template #banner>
       <BannerContent>
-        <template #title>{{ app?.data.name }}</template>
+        <template #title>{{ app?.name }}</template>
         <template #description>
-          {{ app?.data.description }}
+          {{ app?.description }}
         </template>
         <UiButton size="sm" variant="secondary">
           <Icon name="lucide:settings" class="h-4 w-4" />
