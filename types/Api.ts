@@ -25,6 +25,7 @@ export interface ApiResponse<T> {
 export interface ApiOptions<T> extends UseFetchOptions<ApiResponse<T>> {
   fatal?: boolean;
   store?: boolean;
+  silent?: boolean;
 }
 
 export interface ApiFetchOptions<T> extends ApiOptions<T> {

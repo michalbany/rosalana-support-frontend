@@ -11,27 +11,22 @@
   });
 
   const pending = ref(false);
+  const errors = ref<Record<string, string[]>>({});
+  const lastVisitedPage = useActivity().activity().last()?.path;
 
   const submit = async () => {
     pending.value = true;
-    const [status, response] = await useAuth().register(form);
+    const { error, data } = await useAuth().register(form);
+    errors.value = error.value;
     pending.value = false;
-    if (status) {
-      if (lastVisited) {
-        navigateTo(lastVisited);
+    if (!error.value) {
+      if (lastVisitedPage) {
+        navigateTo(lastVisitedPage);
       } else {
         navigateTo("/");
       }
     }
   };
-
-  let lastVisited: string | undefined;
-
-  onMounted(() => {
-    if (import.meta.client && typeof localStorage !== "undefined") {
-      lastVisited = useActivity().activity().last()?.path;
-    }
-  });
 </script>
 <template>
   <NuxtLayout name="auth">
@@ -41,14 +36,26 @@
     </template>
 
     <form class="flex flex-col gap-4" @submit.prevent="submit">
-      <UiInput type="text" v-model="form.name" placeholder="Name" />
-      <UiInput type="email" v-model="form.email" placeholder="Email" />
-      <UiInput type="password" v-model="form.password" placeholder="Password" />
-      <UiInput
-        type="password"
-        v-model="form.password_confirmation"
-        placeholder="Password Confirmation"
-      />
+      <div>
+        <UiInput type="text" v-model="form.name" placeholder="Name" />
+        <UiErrorText :error="errors?.name" />
+      </div>
+      <div>
+        <UiInput type="email" v-model="form.email" placeholder="Email" />
+        <UiErrorText :error="errors?.email" />
+      </div>
+      <div>
+        <UiInput type="password" v-model="form.password" placeholder="Password" />
+        <UiErrorText :error="errors?.password" />
+      </div>
+      <div>
+        <UiInput
+          type="password"
+          v-model="form.password_confirmation"
+          placeholder="Password Confirmation"
+        />
+        <UiErrorText :error="errors?.password_confirmation" />
+      </div>
 
       <UiButton type="submit" :disabled="pending">Register</UiButton>
       <UiButton

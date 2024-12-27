@@ -34,11 +34,13 @@ export default defineNuxtPlugin(() => {
           fatal: true,
         });
       } else {
-        useSonner.error(response.statusText, {
-          description:
-            response._data.error || response._data.message ||
-            "There was an error when fetching data from the server please refresh the page or try again later.",
-        });
+        if (!apiOptions.silent) {
+            useSonner.error(response.statusText, {
+                description:
+                response._data.error || response._data.message ||
+                "There was an error when fetching data from the server please refresh the page or try again later.",
+            });
+        }
       }
       // Zavoláme per-request onResponseError hook, pokud je definován
       const perRequestHooks = (options as ApiFetchOptions<any>).perRequestHooks || {};

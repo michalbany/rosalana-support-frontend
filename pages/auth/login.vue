@@ -33,13 +33,13 @@
       <p class="text-xs">Welcome back! Please login to your account.</p>
     </template>
     <form class="flex flex-col gap-4" @submit.prevent="submit">
-      <div class="">
+      <div>
         <UiInput type="text" v-model="form.email" placeholder="Email" />
-        <UiErrorText :error="errors.email" />
+        <UiErrorText :error="errors?.email" />
       </div>
-      <div class="">
+      <div>
         <UiInput type="password" v-model="form.password" placeholder="Password" />
-        <UiErrorText :error="errors.password" />
+        <UiErrorText :error="errors?.password" />
       </div>
       <div class="flex items-center justify-between gap-6">
         <div class="flex items-center gap-2">

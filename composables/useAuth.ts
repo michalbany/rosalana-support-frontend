@@ -24,27 +24,19 @@ export function useAuth() {
   }
 
   async function logout() {
-    await csrf();
-    const xsrfValue = useCookie("XSRF-TOKEN").value as string;
-    try {
-      const response = await $fetch("/logout", {
-        method: "POST",
-        credentials: "include",
-        baseURL: baseURL,
-        headers: {
-          Accept: "application/json",
-          "X-XSRF-TOKEN": xsrfValue,
-        },
-      });
-
-      user.value = null;
-      navigateTo("/");
-      return [true, response];
-    } catch (error) {
-      user.value = null;
-      navigateTo("/");
-      return [false, error];
-    }
+    return await useApiRuntime('/logout', {
+      store: false,
+      method: "POST",
+      silent: true,
+      onResponse: () => {
+        user.value = null;
+        navigateTo("/");
+      },
+      onResponseError: () => {
+        user.value = null;
+        navigateTo("/");
+      }
+    });
   }
 
   async function register(credentials: {
@@ -53,26 +45,19 @@ export function useAuth() {
     password: string;
     password_confirmation: string;
   }) {
-    // await csrf();
-    // const xsrfValue = useCookie("XSRF-TOKEN").value as string;
-    // try {
-    //   const response = await $fetch<ApiResponse>("/register", {
-    //     method: "POST",
-    //     credentials: "include",
-    //     baseURL: baseURL,
-    //     headers: {
-    //       Accept: "application/json",
-    //       "X-XSRF-TOKEN": xsrfValue,
-    //     },
-    //     body: JSON.stringify(credentials),
-    //   });
 
-    //   user.value = response.data;
-    //   return [true, response];
-    // } catch (error) {
-    //   user.value = null;
-    //   return [false, error];
-    // }
+    return await useApiRuntime('/register', {
+      store: false,
+      method: "POST",
+      body: JSON.stringify(credentials),
+      onResponse: ({ response }) => {
+        user.value = response._data.data;
+        useSonner.success(response._data.message);
+      },
+      onResponseError: ({ response }) => {
+        user.value = null;
+      }
+    });
   }
 
   async function csrf() {
