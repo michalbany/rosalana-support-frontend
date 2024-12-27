@@ -12,18 +12,38 @@
   );
 
   const defaultTab = computed(() => props.defaultTab || props.tabs[0]);
+
+  const disabledTabs = ref<string[]>([]);
+
+  const tabs = computed(() => {
+    return props.tabs.map((tab) => {
+      if (tab.startsWith("[X]")) {
+        const cleanedTab = tab.replace("[X]", "").trim();
+        if (!disabledTabs.value.includes(cleanedTab)) {
+          disabledTabs.value.push(cleanedTab);
+        }
+        return cleanedTab;
+      }
+      return tab;
+    });
+  });
 </script>
 <template>
-  <UiTabs orientation="vertical" class="mt-6 flex w-full overflow-hidden" :default-value="defaultTab">
-    <UiTabsList class="flex h-full min-w-48 flex-col gap-1 justify-start rounded-lg" :pill="false">
+  <UiTabs
+    orientation="vertical"
+    class="mt-6 flex w-full overflow-hidden"
+    :default-value="defaultTab"
+  >
+    <UiTabsList class="flex h-full min-w-48 flex-col justify-start gap-1 rounded-lg" :pill="false">
       <UiTabsTrigger
-        class="w-full justify-start data-[state=active]:bg-zinc-200/80 dark:data-[state=active]:bg-zinc-800/80"
+        class="w-full justify-start data-[state=active]:bg-zinc-200/80 data-[state=active]:text-primary dark:data-[state=active]:bg-zinc-800/80"
         :pill="false"
         :value="tab"
-        v-for="(tab, i) in props.tabs"
+        v-for="(tab, i) in tabs"
+        :disabled="disabledTabs.includes(tab)"
         :key="i"
       >
-        <Icon v-if="props.tabsIcons[i]" :name="props.tabsIcons[i]" class="h-4 w-4 mr-2" />
+        <Icon v-if="props.tabsIcons[i]" :name="props.tabsIcons[i]" class="mr-2 h-4 w-4" />
         {{ textToLabel(tab) }}
       </UiTabsTrigger>
     </UiTabsList>

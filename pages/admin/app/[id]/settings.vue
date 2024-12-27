@@ -8,8 +8,24 @@
     title: app?.value.name,
   });
 
-  const tabs = ["public_profile", "notifications", "advanced"];
-  const tabsIcons = ["lucide:user", "lucide:bell", "lucide:settings"];
+  const tabs = [
+    "public_profile",
+    "[X]notifications",
+    "[X]users",
+    "[X]database",
+    "[X]public_api",
+    "[X]sessions",
+    "advanced",
+  ];
+  const tabsIcons = [
+    "lucide:layout-panel-top",
+    "lucide:bell",
+    "lucide:users",
+    "lucide:database",
+    "lucide:waypoints",
+    "lucide:wind",
+    "lucide:settings",
+  ];
 </script>
 <template>
   <NuxtLayout name="main">
@@ -24,7 +40,9 @@
     </LayoutHeader>
 
     <SettingsTabs :tabs="tabs" :tabs-icons="tabsIcons">
-        
+        <template #public_profile>
+            <SettingsAppProfileTab :app="app" />
+        </template>
     </SettingsTabs>
   </NuxtLayout>
 </template>
