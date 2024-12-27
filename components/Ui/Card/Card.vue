@@ -9,7 +9,7 @@
       <UiBadge
         v-if="props.badge !== undefined"
         class="absolute left-2 top-2"
-        :class="{ 'bg-rose-500/20 text-rose-500': props.badge, 'bg-zinc-500/20 text-zinc-500': !props.badge }"
+        :class="{ 'bg-rose-500/20 text-rose-500 hover:bg-rose-500/20': props.badge, 'bg-zinc-500/20 text-zinc-500 hover:bg-zinc-500/20': !props.badge }"
       >
         <Icon name="lucide:circle" class="h-2 w-2 mr-1" />
         {{ props.badge ? "Online" : "Offline" }}

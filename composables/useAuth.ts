@@ -47,8 +47,11 @@ export function useAuth() {
       });
 
       user.value = null;
+      navigateTo("/");
       return [true, response];
     } catch (error) {
+      user.value = null;
+      navigateTo("/");
       return [false, error];
     }
   }
@@ -102,5 +105,6 @@ export function useAuth() {
     register,
     csrf,
     user,
+    cookie: (name: 'RA-TOKEN' | 'XSRF-TOKEN') => useCookie(name).value as string
   };
 }
