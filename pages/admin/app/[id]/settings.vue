@@ -7,10 +7,13 @@
   useHead({
     title: app?.value.name,
   });
+
+  const tabs = ["public_profile", "notifications", "advanced"];
+  const tabsIcons = ["lucide:user", "lucide:bell", "lucide:settings"];
 </script>
 <template>
   <NuxtLayout name="main">
-    <LayoutHeader level="1">
+    <LayoutHeader level="1" :logo="app?.icon">
       <template #title>
         {{ app?.name }}
       </template>
@@ -18,13 +21,10 @@
       <template #subtitle>
         {{ app?.description }}
       </template>
-
-      <template #action>
-        <UiButton size="sm" @click="navigateTo('/admin/app/register')">
-          <Icon name="lucide:settings" class="h-4 w-4" />
-          Settings
-        </UiButton>
-      </template>
     </LayoutHeader>
+
+    <SettingsTabs :tabs="tabs" :tabs-icons="tabsIcons">
+        
+    </SettingsTabs>
   </NuxtLayout>
 </template>
