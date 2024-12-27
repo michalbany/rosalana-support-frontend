@@ -15,7 +15,7 @@
 <template>
   <NuxtLayout name="main">
     <template #banner>
-      <BannerContent>
+      <LayoutBannerContent>
         <template #title>Admin Dashboard</template>
         <template #description> Manage your applications and users. </template>
         <div
@@ -29,7 +29,7 @@
             variant="secondary"
           />
         </div>
-      </BannerContent>
+      </LayoutBannerContent>
     </template>
 
     <div class="mt-12 flex items-center justify-between">

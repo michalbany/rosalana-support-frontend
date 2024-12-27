@@ -27,7 +27,7 @@
 <template>
   <NuxtLayout name="main">
     <template #banner>
-      <BannerContent>
+      <LayoutBannerContent>
         <template #title>Support & Documentation</template>
         <template #description>
           Need help with something? Check out our most frequently asked questions.
@@ -43,7 +43,7 @@
             variant="secondary"
           />
         </div>
-      </BannerContent>
+      </LayoutBannerContent>
     </template>
 
     <h2 class="mt-12 text-2xl font-bold text-zinc-800 dark:text-white">Aplications</h2>

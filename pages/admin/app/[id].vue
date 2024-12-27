@@ -10,17 +10,21 @@
 </script>
 <template>
   <NuxtLayout name="main">
-    <template #banner>
-      <BannerContent>
-        <template #title>{{ app?.name }}</template>
-        <template #description>
-          {{ app?.description }}
-        </template>
-        <UiButton size="sm" variant="secondary">
+    <LayoutHeader level="1">
+      <template #title>
+        {{ app?.name }}
+      </template>
+
+      <template #subtitle>
+        {{ app?.description }}
+      </template>
+
+      <template #action>
+        <UiButton size="sm" @click="navigateTo('/admin/app/register')">
           <Icon name="lucide:settings" class="h-4 w-4" />
           Settings
         </UiButton>
-      </BannerContent>
-    </template>
+      </template>
+    </LayoutHeader>
   </NuxtLayout>
 </template>
