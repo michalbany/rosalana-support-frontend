@@ -33,9 +33,9 @@
                 title="Home"
                 @click="navigateTo('/')"
                 icon="lucide:home"
-                class="cursor-pointer"
+                class="cursor-pointer hover:text-primary dark:hover:text-primary hover:bg-zinc-200/80 dark:hover:bg-zinc-800/80"
                 :class="{
-                  'text-action hover:text-action bg-zinc-200 hover:bg-zinc-200 dark:bg-slate-600/80':
+                  'bg-zinc-200/80 text-primary dark:bg-zinc-800/80 hover:bg-zinc-200/80 dark:hover:bg-zinc-800/80':
                     $router.currentRoute.value.path === '/',
                 }"
               />
@@ -44,7 +44,7 @@
                 disabled
                 icon="lucide:user"
                 :class="{
-                  'text-action hover:text-action bg-zinc-200 hover:bg-zinc-200 dark:bg-slate-600/80':
+                  'bg-zinc-200/80 text-primary dark:bg-zinc-800/80 hover:bg-zinc-200/80 dark:hover:bg-zinc-800/80':
                     $router.currentRoute.value.path === `/users/${useAuth().user.value?.id}`,
                 }"
               />
@@ -52,10 +52,10 @@
                 title="Admin"
                 v-if="useAuth().user.value?.is_admin"
                 @click="navigateTo('/admin')"
-                class="cursor-pointer"
+                class="cursor-pointer hover:text-primary dark:hover:text-primary hover:bg-zinc-200/80 dark:hover:bg-zinc-800/80"
                 icon="lucide:pencil-ruler"
                 :class="{
-                  'text-action hover:text-action bg-zinc-200 hover:bg-zinc-200 dark:bg-slate-600/80':
+                  'bg-zinc-200/80 text-primary dark:bg-zinc-800/80 hover:bg-zinc-200/80 dark:hover:bg-zinc-800/80':
                     $router.currentRoute.value.path.startsWith('/admin'),
                 }"
               />
@@ -63,7 +63,7 @@
               <UiDropdownMenuItem
                 title="Logout"
                 icon="lucide:log-out"
-                class="cursor-pointer"
+                class="cursor-pointer hover:text-primary dark:hover:text-primary hover:bg-zinc-200/80 dark:hover:bg-zinc-800/80"
                 @click="useAuth().logout()"
               />
             </UiDropdownMenuContent>
