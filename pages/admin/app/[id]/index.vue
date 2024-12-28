@@ -1,22 +1,24 @@
 <script setup lang="ts">
-  const { data: app } = await useApi<any>("/apps/" + useRoute().params.id, {
+import type { APIDataStructure } from '~/types';
+
+  const { data: app } = await useApi<APIDataStructure>("/apps/" + useRoute().params.id, {
     method: "GET",
     fatal: true,
   });
 
   useHead({
-    title: app?.value.name,
+    title: app?.value?.attributes.name,
   });
 </script>
 <template>
   <NuxtLayout name="main">
     <LayoutHeader level="1">
       <template #title>
-        {{ app?.name }}
+        {{ app?.attributes.name }}
       </template>
 
       <template #subtitle>
-        {{ app?.description }}
+        {{ app?.attributes.description }}
       </template>
 
       <template #action>

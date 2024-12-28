@@ -1,16 +1,18 @@
 <script setup lang="ts">
+import type { APIDataStructure } from '~/types';
+
   useHead({
     title: "Admin",
   });
 
-  const { data: apps } = await useApi<any>("/apps", {
+  const { data: apps } = await useApi<APIDataStructure[]>("/apps?filter[active]", {
     method: "GET",
     fatal: true,
   });
 
-  const computedApps = computed(() => {
-    return apps.value.filter((app: any) => app.active).slice(0, 4);
-  });
+  const computedApp = computed(() => {
+    return apps.value?.slice(0, 4);
+  })
 </script>
 <template>
   <NuxtLayout name="main">
@@ -44,12 +46,12 @@
     <div class="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
       <UiCard
         class="flex justify-center text-center"
-        v-for="(app, i) in computedApps"
+        v-for="(app, i) in computedApp"
         :key="i"
-        :title="app.name"
-        :description="app.description"
-        :icon="app.icon"
-        :badge="app.active"
+        :title="app.attributes.name"
+        :description="app.attributes.description"
+        :icon="app.attributes.icon"
+        :badge="app.attributes.active"
         @click="navigateTo('/admin/app/' + app.id)"
       />
     </div>

@@ -1,6 +1,8 @@
 <script setup lang="ts">
+  import type { APIDataStructure } from "~/types";
+
   const props = defineProps<{
-    app: any;
+    app: APIDataStructure | null;
   }>();
 
   const responseStore = useResponseStore();
@@ -10,7 +12,7 @@
   const appStatusPending = ref(false);
 
   const appStatus = computed(() => {
-    if (props.app?.active) {
+    if (props.app?.attributes.active) {
       return {
         description: "The app is currently enabled. Users can authenticate via Rosalana Accounts.",
         button: "Disable",
@@ -39,18 +41,11 @@
       store: false,
       onResponse: ({ response }) => {
         useSonner.success(response._data.message);
-        if (response._data.data.token) {
-          appStatusToken.value = response._data.data.token;
+        if (response._data.data.attributes.token) {
+          appStatusToken.value = response._data.data.attributes.token;
           openStatusResponseModal.value = true;
-          const newData = {
-            ...response._data,
-            data: response._data.data.app,
-          };
-          responseStore.update(newData);
-        } else {
-          responseStore.update(response._data);
-          console.log(response._data);
         }
+        responseStore.update(response._data);
       },
     });
 
@@ -63,15 +58,17 @@
   const openTokenResponseModal = ref(false);
 
   const submitAppToken = async () => {
-    console.log(props.app?.id);
     appTokenPending.value = true;
-    const { data } = await useApiRuntime<any>(`/apps/${props.app.id}/refresh`, {
+    const { data } = await useApiRuntime<any>(`/apps/${props.app?.id}/refresh`, {
       method: "POST",
       store: false,
       onResponse: ({ response }) => {
         useSonner.success(response._data.message);
-        appTokenToken.value = response._data.data.token;
-        openTokenResponseModal.value = true;
+        if (response._data.data.attributes.token) {
+          appTokenToken.value = response._data.data.attributes.token;
+          openTokenResponseModal.value = true;
+        }
+        responseStore.update(response._data);
       },
     });
 
@@ -82,7 +79,7 @@
   const appRemovePending = ref(false);
   const submitAppRemove = async () => {
     appRemovePending.value = true;
-    const { data } = await useApiRuntime<any>("/apps/" + props.app.id, {
+    const { data } = await useApiRuntime<any>("/apps/" + props.app?.id, {
       method: "DELETE",
       store: false,
       onResponse: ({ response }) => {
@@ -103,7 +100,7 @@
     :pending="appStatusPending"
     :label="appStatus.button"
     confirm
-    :disabled="app.master"
+    :disabled="app?.attributes.master"
     :onResponse="{ url: '/admin/app', label: 'Go To Apps' }"
   >
     <SettingsFormBlock
@@ -134,7 +131,7 @@
     :pending="appTokenPending"
     label="Regenerate Token"
     confirm
-    :disabled="app.master || !app.active"
+    :disabled="app?.attributes.master || !app?.attributes.active"
     :onResponse="{ url: '/admin/app', label: 'Go To Apps' }"
   >
     <SettingsFormBlock
@@ -165,7 +162,7 @@
     :pending="appRemovePending"
     label="Remove App"
     confirm
-    :disabled="app.master"
+    :disabled="app?.attributes.master"
     :onResponse="{ url: '/admin/app', label: 'Go To Apps' }"
   >
     <SettingsFormBlock

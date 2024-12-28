@@ -1,12 +1,12 @@
 <script setup lang="ts">
   import { useDateFormat } from "@vueuse/core";
-  import type { VTColumn } from "~/types";
+  import type { APIDataStructure, VTColumn } from "~/types";
 
   useHead({
     title: "All Apps",
   });
 
-  const { data: apps } = await useApi<any>("/apps", {
+  const { data: apps } = await useApi<APIDataStructure[]>("/apps", {
     method: "GET",
   });
 
@@ -97,6 +97,6 @@
         New App
       </UiButton>
     </div>
-    <VisualTable class="mt-6" :data="apps" :columns="columns" :show-select="true" />
+    <VisualTable class="mt-6" :data="apps" prefix="attributes" :columns="columns" :show-select="true" />
   </NuxtLayout>
 </template>

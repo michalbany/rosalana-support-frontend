@@ -1,4 +1,3 @@
-import type { ApiResponse } from "~/types";
 
 const useUser = () => useState<any | null>("user", () => null)
 

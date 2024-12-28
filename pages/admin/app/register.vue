@@ -1,14 +1,19 @@
 <script setup lang="ts">
+import type { APIDataStructure } from '~/types';
+
   const form = reactive({
     name: "",
     description: "",
     icon: "",
   });
 
+  useHead({
+    title: "Register App",
+  });
+
   const errors = ref<Record<string, string[]>>({});
   const pending = ref(false);
-  const appCodeCopied = ref(false);
-  const formResponse = ref<any>({});
+  const formResponse = ref<APIDataStructure | null>(null);
   const openModal = ref(false);
 
   const submit = async () => {
@@ -19,7 +24,7 @@
       icon: form.icon || "lucide:shield-question",
     };
 
-    const { error, data } = await useApiRuntime<any>("/apps", {
+    const { error, data } = await useApiRuntime<APIDataStructure>("/apps", {
       method: "POST",
       body: JSON.stringify(payload),
       store: false,
@@ -44,7 +49,7 @@
         :pending="pending"
         :response="openModal"
         hide-close
-        :onResponse="{ url: '/admin/app/' + formResponse?.app?.id, label: 'View App' }"
+        :onResponse="{ url: '/admin/app/' + formResponse?.id, label: 'View App' }"
       >
         <SettingsFormBlock
           name="name"
@@ -78,7 +83,7 @@
         <template #response-description> Your app has been successfully registered. </template>
 
         <template #response-action="{ action }">
-          <CopyInput :value="formResponse?.token" @copied="() => action(true)" />
+          <CopyInput :value="formResponse?.attributes.token" @copied="() => action(true)" />
         </template>
       </SettingsForm>
       <div

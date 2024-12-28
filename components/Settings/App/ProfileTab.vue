@@ -1,14 +1,16 @@
 <script setup lang="ts">
+import type { APIDataStructure } from '~/types';
+
   const props = defineProps<{
-    app: any;
+    app: APIDataStructure | null;
   }>();
 
   const responseStore = useResponseStore();
 
   const form = reactive({
-    name: props.app.name,
-    description: props.app.description,
-    icon: props.app.icon,
+    name: props.app?.attributes.name,
+    description: props.app?.attributes.description,
+    icon: props.app?.attributes.icon,
   });
 
   const errors = ref<Record<string, string[]>>({});
@@ -26,7 +28,7 @@
         payload.icon = 'lucide:shield-question';
     }
 
-    const { error, data } = await useApiRuntime<any>(`/apps/${props.app.id}`, {
+    const { error, data } = await useApiRuntime<any>(`/apps/${props.app?.id}`, {
       method: "PATCH",
       body: JSON.stringify(payload),
       store: false,

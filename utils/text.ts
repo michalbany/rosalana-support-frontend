@@ -163,11 +163,13 @@ export function inicials(name: string) {
   }
   
   export function ellipsis(
-    text: string,
+    text: string|null,
     { length = 20, breakPoint = 640 }: { length?: number; breakPoint?: number | null } = {}
   ) {
     const isSmallScreen = breakPoint ? window.innerWidth > breakPoint : false;
-  
+    
+    if (!text) return "-";
+
     if (isSmallScreen || text.length <= length) {
       return text;
     }
