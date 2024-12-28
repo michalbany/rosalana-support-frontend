@@ -33,7 +33,7 @@
       key: "description",
       header: "Description",
       renderAs: (item) =>
-        h("span", { class: "dark:text-zinc-500 text-zinc-400" }, item.description),
+        h("span", { class: "dark:text-zinc-500 text-zinc-400" }, ellipsis(item.description, { length: 60, breakPoint: null })),
     },
     {
       key: "active",
