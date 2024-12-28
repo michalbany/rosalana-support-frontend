@@ -13,7 +13,8 @@ type ResponseItem = {
  */
 export const useResponseStore = defineStore('responseStore', {
   state: () => ({
-    data: null as APIDataStructure | null,
+    // data: null as APIDataStructure | null,
+    data: null as Record<string, any> | null,
     message: null as Record<string, any> | null,
     permissions: null as Record<string, boolean> | null,
   }),

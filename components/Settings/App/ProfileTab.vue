@@ -39,14 +39,6 @@
     errors.value = error.value;
     pending.value = false;
   };
-
-  const handleSelectIcon = (icon: string) => {
-    if (form.icon === icon) {
-      form.icon = "";
-    } else {
-      form.icon = icon;
-    }
-  };
 </script>
 <template>
   <SettingsForm @submit="submit" :pending="pending">

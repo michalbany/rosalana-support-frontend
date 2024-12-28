@@ -44,6 +44,10 @@
         <template #public_profile>
             <SettingsAppProfileTab :app="app" />
         </template>
+
+        <template #advanced>
+            <SettingsAppAdvancedTab :app="app" />
+        </template>
     </SettingsTabs>
   </NuxtLayout>
 </template>

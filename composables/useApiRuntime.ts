@@ -39,7 +39,7 @@ export function useApiRuntime<T>(
       } as ApiReturn<T>;
     })
     .catch((error: any) => {
-      let errorValue = error.response._data.error ?? error.response._data.errors ?? null;
+      let errorValue = error.response?._data?.error ?? error.response?._data?.errors ?? null;
       return {
         data: shallowRef(null),
         message: shallowRef(null),
