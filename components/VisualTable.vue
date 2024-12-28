@@ -224,7 +224,7 @@
             placeholder="Search..."
             v-if="showSearch"
             name="search"
-            class="w-40 bg-slate-200 transition focus:bg-slate-300/60 inline-block dark:bg-slate-800"
+            class="w-40 bg-zinc-200 transition focus:bg-zinc-300/60 inline-block dark:bg-zinc-800"
             @input="applySearchFilter"
             autocomplete="off"
           />
@@ -270,7 +270,7 @@
                 @click="sortBy(column.key)"
                 :class="{
                   'cursor-pointer': column.enableSort,
-                  'hover:text-muted-foreground': !column.enableSort,
+                  'dark:text-zinc-600 text-zinc-400': !column.enableSort,
                 }"
               >
                 <div class="flex items-center">
@@ -298,7 +298,7 @@
               <UiTableCell
                 v-for="column in table.columns.visible"
                 :key="column.key"
-                :class="column.additionalColumn ? 'text-slate-400' : ''"
+                :class="column.additionalColumn ? 'text-zinc-400' : ''"
               >
                 <VTRender :content="column.content()" :item="row" />
               </UiTableCell>
@@ -384,7 +384,7 @@
       </div>
       <span
         v-show="table.data.filtered.length !== table.data.original.length"
-        class="text-normal text-sm italic text-slate-500"
+        class="text-normal text-sm italic text-zinc-500"
         >{{ table.data.filtered.length }} items filtered</span
       >
     </div>

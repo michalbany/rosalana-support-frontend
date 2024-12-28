@@ -38,6 +38,7 @@
     {
       key: "active",
       header: "Status",
+      enableSort: false,
       renderAs: (item) => {
         const active = h(
           resolveComponent("UiBadge"),

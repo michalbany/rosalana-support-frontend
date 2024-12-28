@@ -131,7 +131,7 @@ export function useVisualTable(config: VTConfig) {
   const stylesCase = (style: VTRowStyle | undefined) => {
     switch (style) {
       case "checked":
-        return "bg-slate-200 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-800";
+        return "bg-rose-500/10 hover:bg-rose-500/10";
       case "success":
         return "bg-green-100 hover:bg-green-200";
       case "warning":
