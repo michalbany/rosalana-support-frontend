@@ -84,7 +84,7 @@
 /* Styly pro MarkDown */
 @layer components {
   .github-markdown.small {
-    @apply prose-sm prose-slate sm:prose-sm;
+    @apply prose-sm prose-zinc sm:prose-sm;
     @apply prose-p:my-2;
     @apply prose-ul:my-2;
   }
@@ -99,13 +99,13 @@
   }
 
   .github-markdown {
-    @apply prose prose-sm prose-slate max-w-none sm:prose-base;
-    @apply prose-headings:border-b prose-headings:border-gray-200 prose-headings:pb-2;
+    @apply prose prose-sm prose-zinc max-w-none sm:prose-base;
+    @apply prose-headings:border-b dark:prose-headings:text-zinc-200 prose-headings:border-gray-200 prose-headings:pb-2;
     @apply prose-h1:text-2xl prose-h1:font-semibold prose-h2:mt-8 prose-h2:text-xl prose-h3:text-lg;
     @apply prose-a:text-primary prose-a:no-underline hover:prose-a:underline;
-    @apply prose-strong:font-semibold prose-strong:dark:text-slate-50;
+    @apply prose-strong:font-semibold prose-strong:dark:text-zinc-50;
     @apply prose-code:rounded prose-code:bg-gray-200 prose-code:p-1 prose-code:font-normal;
-    @apply dark:text-slate-200;
+    @apply dark:text-zinc-200;
 
     & pre code {
       @apply whitespace-pre-wrap rounded-none bg-transparent p-0 text-sm text-inherit;
@@ -113,7 +113,7 @@
     }
 
     & pre {
-      @apply border border-border pt-8 dark:bg-slate-800;
+      @apply border border-border pt-8 dark:bg-zinc-800;
       background-color: rgb(232, 237, 245);
     }
 
@@ -122,11 +122,11 @@
     }
 
     .line.highlight {
-      @apply bg-slate-500/10;
+      @apply bg-zinc-500/10;
     }
 
     .line.highlighted:not(.error):not(.warning) {
-      @apply bg-slate-500/10;
+      @apply bg-zinc-500/10;
     }
 
     .line.highlighted.error span {
@@ -171,7 +171,7 @@
     }
 
     @apply prose-pre:rounded-md prose-pre:p-4;
-    @apply prose-blockquote:font-normal prose-blockquote:text-slate-600;
+    @apply prose-blockquote:font-normal prose-blockquote:text-zinc-600;
 
     /* Styly pro externí odkazy s ikonou */
     & a:not([href^="#"]) {

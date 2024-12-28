@@ -1,7 +1,9 @@
 <script setup lang="ts">
-  const props = defineProps<{
-    type: "success" | "info" | "warning" | "default" | "destructive" | "ghost" | undefined;
-  }>();
+  const props = withDefaults(defineProps<{
+    type?: "success" | "info" | "warning" | "default" | "destructive" | "ghost" | undefined;
+  }>(), {
+    type: "default",
+  });
 
   const icon = computed(() => {
     switch (props.type) {
@@ -27,6 +29,6 @@
 </template>
 <style scoped>
   code {
-    @apply bg-slate-100 text-slate-900 font-mono border border-action/20 px-1 py-0.5 rounded-sm;
+    @apply bg-slate-100 text-slate-900 font-mono border border-primary/20 px-1 py-0.5 rounded-sm;
   }
 </style>
