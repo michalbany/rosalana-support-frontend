@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import type { APIDataStructure } from "~/types";
 
-  const { data: doc } = await useApi<APIDataStructure>("/docs/" + useRoute().params.id, {
+  const { data: doc } = await useApi<APIDataStructure>("/docs/" + useRoute().params.id_1, {
     method: "GET",
     fatal: true,
     store: true,
@@ -46,7 +46,7 @@
     {
       title: "Edit",
       icon: "lucide:pencil",
-      click: () => null,
+      click: () => navigateTo("/admin/app/" + doc.value?.relationships.app.id + "/doc/" + doc.value?.id + "/edit"),
     },
     {
       title: "Delete",

@@ -80,7 +80,7 @@
     <template #subtitle> Write docs for your app to help users understand how to use it. </template>
 
     <template #action>
-      <UiButton size="sm" @click="navigateTo(`${props.linkPrefix}/app/${appID}/doc/create`)">
+      <UiButton size="sm" @click="navigateTo(`${props.linkPrefix}/app/${appID}/doc/new`)">
         <Icon name="lucide:plus" class="h-4 w-4" />
         New Doc
       </UiButton>

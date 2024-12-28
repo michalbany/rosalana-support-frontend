@@ -92,7 +92,7 @@
     <div class="mt-12 flex items-center justify-between">
       <h2 class="text-2xl font-bold text-zinc-800 dark:text-white">Aplications</h2>
 
-      <UiButton size="sm" @click="navigateTo('/admin/app/register')">
+      <UiButton size="sm" @click="navigateTo('/admin/app/new')">
         <Icon name="lucide:plus" class="h-4 w-4" />
         New App
       </UiButton>
