@@ -11,6 +11,7 @@
       buttonVariant?: string;
       disabled?: boolean;
       onResponse?: any;
+      hideClose?: boolean;
     }>(),
     {
       label: "Save",
@@ -18,6 +19,7 @@
       forceAction: true,
       variant: "multiple",
       onResponse: { url: "/", label: "Go Home" },
+      hideClose: false,
     }
   );
 
@@ -115,6 +117,7 @@
       <div class="mt-4 flex items-center gap-4">
         <UiButton
           size="sm"
+          v-if="!props.hideClose"
           :disabled="!actionHit && props.forceAction"
           @click="responseModal = false"
           >Close</UiButton

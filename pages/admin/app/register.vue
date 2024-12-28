@@ -33,24 +33,71 @@
     openModal.value = true;
     pending.value = false;
   };
-
-  const handleSelectIcon = (icon: string) => {
-    if (form.icon === icon) {
-      form.icon = "";
-    } else {
-      form.icon = icon;
-    }
-  };
-
-  const handleUserCopiedText = () => {
-    appCodeCopied.value = true;
-  };
 </script>
 <template>
   <NuxtLayout name="main">
     <h1 class="mb-4 text-2xl font-bold">Register App</h1>
 
-    <UiDialog :open="openModal">
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+      <SettingsForm
+        @submit="submit"
+        :pending="pending"
+        :response="openModal"
+        hide-close
+        :onResponse="{ url: '/admin/app/' + formResponse?.app?.id, label: 'View App' }"
+      >
+        <SettingsFormBlock
+          name="name"
+          :errors="errors?.name"
+          description="App name may appear around Rosalana system as a unique identifier."
+        >
+          <UiInput v-model="form.name" id="name" class="sm:w-[400px]" />
+        </SettingsFormBlock>
+
+        <SettingsFormBlock
+          name="description"
+          :errors="errors?.description"
+          description="App description is a brief explanation of what the app does to help users understand its purpose. It may has around 1-3 sentences."
+        >
+          <UiTextarea v-model="form.description" id="description" class="sm:w-[400px]" />
+        </SettingsFormBlock>
+
+        <SettingsFormBlock
+          name="icon"
+          :errors="errors?.icon"
+          description="App icon is a visual representation of the app. It may be used in various places around Rosalana system."
+        >
+          <div class="flex items-center">
+            <UiInput v-model="form.icon" id="icon" class="sm:w-[400px]" />
+            <Icon :name="form.icon" class="ml-3 h-7 w-7 align-middle text-zinc-500" />
+          </div>
+        </SettingsFormBlock>
+
+        <template #response-title> App Registered </template>
+
+        <template #response-description> Your app has been successfully registered. </template>
+
+        <template #response-action="{ action }">
+          <CopyInput :value="formResponse?.token" @copied="() => action(true)" />
+        </template>
+      </SettingsForm>
+      <div
+        class="order-first flex items-center justify-center rounded-lg border border-dashed p-5 sm:order-last"
+      >
+        <div class="flex w-full flex-col items-center justify-center gap-2">
+          <Icon
+            class="mb-2 size-32 text-zinc-300 dark:text-zinc-700"
+            :name="form.icon || 'lucide:shield-question'"
+          />
+          <h2 class="text-lg font-semibold">{{ form.name || "App Name" }}</h2>
+          <p class="max-w-[300px] text-center text-sm text-zinc-600 dark:text-zinc-400">
+            {{ form.description || "Description" }}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- <UiDialog :open="openModal">
       <UiDialogContent hide-close>
         <UiDialogTitle class="sr-only">App Registered</UiDialogTitle>
         <UiDialogDescription class="sr-only">Copy the token bellow</UiDialogDescription>
@@ -80,9 +127,9 @@
           >
         </div>
       </UiDialogContent>
-    </UiDialog>
+    </UiDialog> -->
 
-    <form @submit.prevent="submit" class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+    <!-- <form @submit.prevent="submit" class="grid grid-cols-1 gap-4 sm:grid-cols-2">
       <div class="flex flex-col gap-4">
         <div>
           <UiInput type="text" v-model="form.name" placeholder="App Name" />
@@ -124,6 +171,6 @@
           </p>
         </div>
       </div>
-    </form>
+    </form> -->
   </NuxtLayout>
 </template>
