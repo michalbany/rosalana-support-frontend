@@ -32,7 +32,7 @@ function auth() {
 }
 
 function admin() {
-  if (!useAuth().user.value?.is_admin) {
+  if (!useAuth().user.value?.attributes.is_admin) {
     return navigateTo("/");
   }
 }

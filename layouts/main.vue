@@ -22,12 +22,12 @@
           <UiDropdownMenu>
             <UiDropdownMenuTrigger as-child>
               <UiAvatar
-                :fallback="inicials(useAuth().user.value?.name)"
+                :fallback="inicials(useAuth().user.value?.attributes.name)"
                 class="h-12 w-12 cursor-pointer"
               />
             </UiDropdownMenuTrigger>
             <UiDropdownMenuContent class="mr-8 w-36">
-              <UiDropdownMenuLabel :label="useAuth().user.value?.name" />
+              <UiDropdownMenuLabel :label="useAuth().user.value?.attributes.name" />
               <UiDropdownMenuSeparator />
               <UiDropdownMenuItem
                 title="Home"
@@ -50,7 +50,7 @@
               />
               <UiDropdownMenuItem
                 title="Admin"
-                v-if="useAuth().user.value?.is_admin"
+                v-if="useAuth().user.value?.attributes.is_admin"
                 @click="navigateTo('/admin')"
                 class="cursor-pointer hover:text-primary dark:hover:text-primary hover:bg-zinc-200/80 dark:hover:bg-zinc-800/80"
                 icon="lucide:pencil-ruler"

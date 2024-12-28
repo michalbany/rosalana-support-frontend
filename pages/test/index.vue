@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { data } = await useApi<any>("/docs", {
+const data = await useApi<any>("/docs", {
     method: "GET",
 });
 </script>
