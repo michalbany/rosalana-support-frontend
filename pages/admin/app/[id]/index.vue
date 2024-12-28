@@ -23,8 +23,16 @@
       </LayoutBannerContent>
     </template>
 
+    <UiAlert
+      v-for="(error, i) in app?.attributes.warnings"
+      :key="i"
+      class="p-3"
+      icon="lucide:alert-circle"
+      :description="error"
+      variant="warning"
+    />
+
     <DocList :docs="app?.relationships.docs" link-prefix="/admin" />
     <IssuesList :issues="app?.relationships.issues" />
-
   </NuxtLayout>
 </template>

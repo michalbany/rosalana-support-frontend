@@ -56,5 +56,16 @@ import type { APIDataStructure } from '~/types';
       />
     </div>
     <UiButton size="sm" variant="link" @click="navigateTo('/admin/app')"> View All </UiButton>
+
+    <div v-for="app in apps" :key="app.id">
+        <UiAlert
+        v-for="(error, i) in app.attributes.warnings"
+        :key="i"
+        class="p-3"
+        icon="lucide:alert-circle"
+        :description="error"
+        variant="warning"
+        />
+    </div>
   </NuxtLayout>
 </template>
