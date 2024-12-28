@@ -7,7 +7,7 @@
       <div class="relative z-50 flex h-20 w-full items-center justify-between px-4 sm:px-8">
         <AppLogo />
 
-        <div class="sm:hidden">
+        <div class="sm:hidden" v-if="!useAuth().autentificated()">
           <UiButton size="icon" variant="secondary">
             <Icon name="lucide:menu" class="h-4 w-4" />
           </UiButton>
@@ -18,7 +18,7 @@
           >
           <UiButton size="sm" @click="navigateTo('/auth/login')">Sign In</UiButton>
         </div>
-        <div v-else class="hidden items-center gap-4 sm:flex">
+        <div v-else class="items-center gap-4 flex">
           <UiDropdownMenu>
             <UiDropdownMenuTrigger as-child>
               <UiAvatar
@@ -33,7 +33,7 @@
                 title="Home"
                 @click="navigateTo('/')"
                 icon="lucide:home"
-                class="cursor-pointer hover:text-primary dark:hover:text-primary hover:bg-zinc-200/80 dark:hover:bg-zinc-800/80"
+                class="cursor-pointer hover:!text-primary dark:hover:text-primary hover:bg-zinc-200/80 dark:hover:bg-zinc-800/80"
                 :class="{
                   'bg-zinc-200/80 text-primary dark:bg-zinc-800/80 hover:bg-zinc-200/80 dark:hover:bg-zinc-800/80':
                     $router.currentRoute.value.path === '/',
@@ -52,7 +52,7 @@
                 title="Admin"
                 v-if="useAuth().user.value?.attributes.is_admin"
                 @click="navigateTo('/admin')"
-                class="cursor-pointer hover:text-primary dark:hover:text-primary hover:bg-zinc-200/80 dark:hover:bg-zinc-800/80"
+                class="cursor-pointer hover:!text-primary dark:hover:text-primary hover:bg-zinc-200/80 dark:hover:bg-zinc-800/80"
                 icon="lucide:pencil-ruler"
                 :class="{
                   'bg-zinc-200/80 text-primary dark:bg-zinc-800/80 hover:bg-zinc-200/80 dark:hover:bg-zinc-800/80':
@@ -63,7 +63,7 @@
               <UiDropdownMenuItem
                 title="Logout"
                 icon="lucide:log-out"
-                class="cursor-pointer hover:text-primary dark:hover:text-primary hover:bg-zinc-200/80 dark:hover:bg-zinc-800/80"
+                class="cursor-pointer hover:!text-primary dark:hover:text-primary hover:bg-zinc-200/80 dark:hover:bg-zinc-800/80"
                 @click="useAuth().logout()"
               />
             </UiDropdownMenuContent>

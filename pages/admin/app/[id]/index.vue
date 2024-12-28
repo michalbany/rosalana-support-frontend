@@ -23,7 +23,7 @@
       </LayoutBannerContent>
     </template>
 
-    <DocList :docs="app?.relationships.docs" />
+    <DocList :docs="app?.relationships.docs" link-prefix="/admin" />
     <IssuesList :issues="app?.relationships.issues" />
 
   </NuxtLayout>

@@ -171,7 +171,7 @@
     }
 
     @apply prose-pre:rounded-md prose-pre:p-4;
-    @apply prose-blockquote:font-normal prose-blockquote:text-zinc-600;
+    @apply prose-blockquote:font-normal prose-blockquote:text-zinc-600 dark:prose-blockquote:text-zinc-500;
 
     /* Styly pro externí odkazy s ikonou */
     & a:not([href^="#"]) {
