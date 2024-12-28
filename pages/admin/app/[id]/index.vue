@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { APIDataStructure } from '~/types';
+  import type { APIDataStructure } from "~/types";
 
   const { data: app } = await useApi<APIDataStructure>("/apps/" + useRoute().params.id, {
     method: "GET",
@@ -12,21 +12,19 @@ import type { APIDataStructure } from '~/types';
 </script>
 <template>
   <NuxtLayout name="main">
-    <LayoutHeader level="1">
-      <template #title>
-        {{ app?.attributes.name }}
-      </template>
-
-      <template #subtitle>
-        {{ app?.attributes.description }}
-      </template>
-
-      <template #action>
-        <UiButton size="sm" @click="navigateTo('/admin/app/' + app?.id + '/settings')">
+    <template #banner>
+      <LayoutBannerContent>
+        <template #title>{{ app?.attributes.name }}</template>
+        <template #description>{{ app?.attributes.description }}</template>
+        <UiButton @click="navigateTo('/admin/app/' + app?.id + '/settings')">
           <Icon name="lucide:settings" class="h-4 w-4" />
           Options
         </UiButton>
-      </template>
-    </LayoutHeader>
+      </LayoutBannerContent>
+    </template>
+
+    <DocList :docs="app?.relationships.docs" />
+    <IssuesList :issues="app?.relationships.issues" />
+
   </NuxtLayout>
 </template>

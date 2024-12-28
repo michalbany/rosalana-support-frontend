@@ -79,3 +79,161 @@
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
 }
+
+
+/* Styly pro MarkDown */
+@layer components {
+  .github-markdown.small {
+    @apply prose-sm prose-slate sm:prose-sm;
+    @apply prose-p:my-2;
+    @apply prose-ul:my-2;
+  }
+
+  .github-markdown.no-pre-m {
+    @apply prose-pre:m-0;
+  }
+
+  .github-markdown.docs {
+    @apply prose-h2:mt-10;
+    @apply prose-h5:font-medium;
+  }
+
+  .github-markdown {
+    @apply prose prose-sm prose-slate max-w-none sm:prose-base;
+    @apply prose-headings:border-b prose-headings:border-gray-200 prose-headings:pb-2;
+    @apply prose-h1:text-2xl prose-h1:font-semibold prose-h2:mt-8 prose-h2:text-xl prose-h3:text-lg;
+    @apply prose-a:text-primary prose-a:no-underline hover:prose-a:underline;
+    @apply prose-strong:font-semibold prose-strong:dark:text-slate-50;
+    @apply prose-code:rounded prose-code:bg-gray-200 prose-code:p-1 prose-code:font-normal;
+    @apply dark:text-slate-200;
+
+    & pre code {
+      @apply whitespace-pre-wrap rounded-none bg-transparent p-0 text-sm text-inherit;
+      color: #90a4ae;
+    }
+
+    & pre {
+      @apply border border-border pt-8 dark:bg-slate-800;
+      background-color: rgb(232, 237, 245);
+    }
+
+    pre.has-focused .line:not(.focused) {
+      @apply opacity-40 transition-opacity;
+    }
+
+    .line.highlight {
+      @apply bg-slate-500/10;
+    }
+
+    .line.highlighted:not(.error):not(.warning) {
+      @apply bg-slate-500/10;
+    }
+
+    .line.highlighted.error span {
+      @apply decoration-red-500 decoration-wavy underline;
+    }
+    .line.highlighted.error::after {
+      content: "! Error";
+      @apply bg-red-500/10 block border-l-4 mt-1 border-red-500 p-1 text-xs text-red-500;
+    }
+    .line.highlighted.warning span {
+      @apply decoration-yellow-500 decoration-wavy underline;
+    }
+    .line.highlighted.warning::after {
+      content: "! Warning";
+      @apply bg-yellow-500/10 block border-l-4 mt-1 border-yellow-500 p-1 text-xs text-orange-500;
+    }
+
+    .line.diff.remove {
+      @apply bg-red-500/10 px-1;
+    }
+    .line.diff.add {
+      @apply bg-green-500/10 px-1;
+    }
+
+    .line.diff.remove::before {
+      content: "-";
+      @apply mr-1 text-red-500;
+    }
+
+    .line.diff.add::before {
+      content: "+";
+      @apply mr-1 text-green-500;
+    }
+
+    & table {
+      /* avoid horizontal scroll */
+      @media (max-width: 640px) {
+        max-width: calc(100vw - 32px - 24px);
+        overflow-x: auto;
+        display: block;
+      }
+    }
+
+    @apply prose-pre:rounded-md prose-pre:p-4;
+    @apply prose-blockquote:font-normal prose-blockquote:text-slate-600;
+
+    /* Styly pro externí odkazy s ikonou */
+    & a:not([href^="#"]) {
+      @apply inline-flex items-center;
+    }
+
+    & a:not([href^="#"])::after {
+      content: "";
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg fill='none' stroke='hsl(160 84%25 39%25)' stroke-linecap='round' stroke-width='1.5'%3E%3Cpath d='M10.046 14c-1.506-1.512-1.37-4.1.303-5.779l4.848-4.866c1.673-1.68 4.25-1.816 5.757-.305c1.506 1.512 1.37 4.1-.303 5.78l-2.424 2.433'/%3E%3Cpath d='M13.954 10c1.506 1.512 1.37 4.1-.303 5.779l-2.424 2.433l-2.424 2.433c-1.673 1.68-4.25 1.816-5.757.305c-1.506-1.512-1.37-4.1.303-5.78l2.424-2.433' opacity='.5'/%3E%3C/g%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-size: 1rem;
+      @apply ml-1 inline-block h-4 w-4;
+    }
+
+    /* Styly pro interní odkazy s '#' na hover */
+    & a[href^="#"] {
+      @apply relative;
+    }
+
+    /* Fix scrollování na interní odkazy */
+    & h2[id]::before,
+    h3[id]::before,
+    h4[id]::before,
+    h5[id]::before {
+      content: "";
+      display: block;
+      height: 130px;
+      margin-top: -130px;
+      pointer-events: none !important;
+
+      @media (max-width: 1024px) {
+        height: 195px;
+        margin-top: -195px;
+      }
+
+      @media (max-width: 640px) {
+        height: 171px;
+        margin-top: -171px;
+      }
+    }
+
+    & a[href^="#"]::after {
+      content: "#";
+      @apply absolute -right-5 text-primary opacity-0 transition-opacity duration-200;
+    }
+
+    & a[href^="#"]:hover::after {
+      @apply opacity-50;
+    }
+  }
+
+  /* Odstranění zpětných apostrofů z inline kódu */
+  .github-markdown :not(pre) > code::before,
+  .github-markdown :not(pre) > code::after {
+    content: none !important;
+  }
+
+  .github-markdown blockquote p::before,
+  .github-markdown blockquote p::after {
+    content: none !important;
+  }
+}
+
+
+

@@ -141,5 +141,5 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate"), require("@tailwindcss/forms")({ strategy: "class" })],
+  plugins: [require("tailwindcss-animate"), require("@tailwindcss/forms")({ strategy: "class" }), require('@tailwindcss/typography'),],
 };

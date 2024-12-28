@@ -10,6 +10,7 @@ export default defineNuxtConfig({
     "@nuxt/icon",
     "@nuxt/fonts",
     '@pinia/nuxt',
+    "@nuxtjs/mdc"
   ],
 
   runtimeConfig: {
@@ -23,6 +24,22 @@ export default defineNuxtConfig({
     exposeConfig: true,
     editorSupport: true,
   },
+  mdc: {
+    components: {
+      map: {
+        "pre": "CustomPre",
+      },
+    },
+    highlight: {
+      highlighter: "shiki",
+      // theme: "snazzy-light",
+      // theme: "everforest-light",
+      // theme: "everforest-light",
+      // theme: "poimandres",
+      theme: "material-theme-lighter",
+    },
+  },
+
 
   ssr: false,
 
@@ -53,6 +70,9 @@ export default defineNuxtConfig({
   },
 
   build: {
-    transpile: ["vue-sonner"]
-  }
+    transpile: ["vue-sonner", "@nuxtjs/mdc"]
+  },
+  alias: {
+    'debug': 'debug/src/browser.js'
+  },
 });
