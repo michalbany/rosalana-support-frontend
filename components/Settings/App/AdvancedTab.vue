@@ -104,6 +104,7 @@
     :label="appStatus.button"
     confirm
     :disabled="app.master"
+    :onResponse="{ url: '/admin/app', label: 'Go To Apps' }"
   >
     <SettingsFormBlock
       :name="`app_status_(${appStatus.state})`"
@@ -134,6 +135,7 @@
     label="Regenerate Token"
     confirm
     :disabled="app.master || !app.active"
+    :onResponse="{ url: '/admin/app', label: 'Go To Apps' }"
   >
     <SettingsFormBlock
       name="app_token"
@@ -164,6 +166,7 @@
     label="Remove App"
     confirm
     :disabled="app.master"
+    :onResponse="{ url: '/admin/app', label: 'Go To Apps' }"
   >
     <SettingsFormBlock
       name="app_remove"

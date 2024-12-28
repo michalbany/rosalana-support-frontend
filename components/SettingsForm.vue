@@ -10,12 +10,14 @@
       variant?: "single" | "multiple";
       buttonVariant?: string;
       disabled?: boolean;
+      onResponse?: any;
     }>(),
     {
       label: "Save",
       confirm: false,
       forceAction: true,
       variant: "multiple",
+      onResponse: { url: "/", label: "Go Home" },
     }
   );
 
@@ -47,11 +49,17 @@
 <template>
   <form
     @submit.prevent="submit"
-    class="flex flex-col mb-8"
+    class="mb-8 flex flex-col"
     :class="{ 'gap-5': props.variant === 'multiple', 'gap-1': props.variant === 'single' }"
   >
     <slot />
-    <UiButton type="submit" :variant="(buttonVariant as ButtonProps['variant'])" :loading="props.pending" :disabled="props.disabled" class="mt-4 w-min">
+    <UiButton
+      type="submit"
+      :variant="buttonVariant as ButtonProps['variant']"
+      :loading="props.pending"
+      :disabled="props.disabled"
+      class="mt-4 w-min"
+    >
       {{ props.label }}
     </UiButton>
   </form>
@@ -114,9 +122,9 @@
         <UiButton
           size="sm"
           :disabled="!actionHit && props.forceAction"
-          @click="navigateTo('/admin')"
+          @click="navigateTo(props.onResponse.url)"
           variant="secondary"
-          >Go to Dashboard</UiButton
+          >{{ props.onResponse.label }}</UiButton
         >
       </div>
     </UiDialogContent>

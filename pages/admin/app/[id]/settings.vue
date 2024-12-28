@@ -38,16 +38,20 @@
       <template #subtitle>
         {{ app?.description }}
       </template>
+
+      <template #action>
+        <UiButton variant="link" size="sm" :to="`/admin/app`"> All Apps </UiButton>
+      </template>
     </LayoutHeader>
 
     <SettingsTabs :tabs="tabs" :tabs-icons="tabsIcons">
-        <template #public_profile>
-            <SettingsAppProfileTab :app="app" />
-        </template>
+      <template #public_profile>
+        <SettingsAppProfileTab :app="app" />
+      </template>
 
-        <template #advanced>
-            <SettingsAppAdvancedTab :app="app" />
-        </template>
+      <template #advanced>
+        <SettingsAppAdvancedTab :app="app" />
+      </template>
     </SettingsTabs>
   </NuxtLayout>
 </template>
