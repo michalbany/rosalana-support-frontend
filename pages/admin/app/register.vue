@@ -14,25 +14,23 @@
   const submit = async () => {
     pending.value = true;
     const payload = {
-        name: form.name,
-        description: form.description,
+      name: form.name,
+      description: form.description,
+      icon: form.icon || "lucide:shield-question",
     };
-    if (form.icon !== "") {
-        Object.assign(payload, { icon: form.icon });
-    }
 
-    const { error, data } = await useApiRuntime<any>('/apps', {
-        method: 'POST',
-        body: JSON.stringify(payload),
-        store: false,
-        onResponse: ({response}) => {
-            useSonner.success(response._data.message);
-            openModal.value = true;
-        },
+    const { error, data } = await useApiRuntime<any>("/apps", {
+      method: "POST",
+      body: JSON.stringify(payload),
+      store: false,
+      onResponse: ({ response }) => {
+        useSonner.success(response._data.message);
+      },
     });
 
     formResponse.value = data.value;
     errors.value = error.value;
+    openModal.value = true;
     pending.value = false;
   };
 
@@ -46,29 +44,42 @@
 
   const handleUserCopiedText = () => {
     appCodeCopied.value = true;
-  }
+  };
 </script>
 <template>
   <NuxtLayout name="main">
     <h1 class="mb-4 text-2xl font-bold">Register App</h1>
 
     <UiDialog :open="openModal">
-        <UiDialogContent hide-close>
-            <UiDialogTitle class="sr-only">App Registered</UiDialogTitle>
-            <UiDialogDescription class="sr-only">Copy the token bellow</UiDialogDescription>
-            <div class="flex items-center gap-4">
-                <Icon name="lucide:shield-check" class="h-8 w-8 text-rose-500" />
-                <div>
-                    <h2 class="text-lg font-semibold">App Registered</h2>
-                    <p class="text-sm text-zinc-600 dark:text-zinc-400">Your app has been successfully registered.</p>
-                </div>
-            </div>
-            <CopyInput :value="formResponse?.token" @copied="handleUserCopiedText" />
-            <div class="mt-4 flex items-center gap-4">
-                <UiButton size="sm" :disabled="!appCodeCopied" @click="navigateTo('/admin/app/' + formResponse?.app.id)">View App</UiButton>
-                <UiButton size="sm" :disabled="!appCodeCopied" @click="navigateTo('/admin')" variant="secondary">Go to Dashboard</UiButton>
-            </div>
-        </UiDialogContent>
+      <UiDialogContent hide-close>
+        <UiDialogTitle class="sr-only">App Registered</UiDialogTitle>
+        <UiDialogDescription class="sr-only">Copy the token bellow</UiDialogDescription>
+        <div class="flex items-center gap-4">
+          <Icon name="lucide:shield-check" class="h-8 w-8 text-rose-500" />
+          <div>
+            <h2 class="text-lg font-semibold">App Registered</h2>
+            <p class="text-sm text-zinc-600 dark:text-zinc-400">
+              Your app has been successfully registered.
+            </p>
+          </div>
+        </div>
+        <CopyInput :value="formResponse?.token" @copied="handleUserCopiedText" />
+        <div class="mt-4 flex items-center gap-4">
+          <UiButton
+            size="sm"
+            :disabled="!appCodeCopied"
+            @click="navigateTo('/admin/app/' + formResponse?.app.id)"
+            >View App</UiButton
+          >
+          <UiButton
+            size="sm"
+            :disabled="!appCodeCopied"
+            @click="navigateTo('/admin/app')"
+            variant="secondary"
+            >Go to Apps</UiButton
+          >
+        </div>
+      </UiDialogContent>
     </UiDialog>
 
     <form @submit.prevent="submit" class="grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -108,7 +119,7 @@
             :name="form.icon || 'lucide:shield-question'"
           />
           <h2 class="text-lg font-semibold">{{ form.name || "App Name" }}</h2>
-          <p class="text-sm text-zinc-600 dark:text-zinc-400 max-w-[300px] text-center">
+          <p class="max-w-[300px] text-center text-sm text-zinc-600 dark:text-zinc-400">
             {{ form.description || "Description" }}
           </p>
         </div>

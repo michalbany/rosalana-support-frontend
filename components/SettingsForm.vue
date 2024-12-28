@@ -1,4 +1,5 @@
 <script setup lang="ts">
+  type ButtonProps = VariantProps<typeof buttonStyles>;
   const props = withDefaults(
     defineProps<{
       pending: boolean;
@@ -7,6 +8,8 @@
       response?: boolean;
       forceAction?: boolean;
       variant?: "single" | "multiple";
+      buttonVariant?: string;
+      disabled?: boolean;
     }>(),
     {
       label: "Save",
@@ -42,9 +45,13 @@
   };
 </script>
 <template>
-  <form @submit.prevent="submit" class="flex flex-col" :class="{'gap-5': props.variant === 'multiple', 'gap-1': props.variant === 'single'}">
+  <form
+    @submit.prevent="submit"
+    class="flex flex-col mb-8"
+    :class="{ 'gap-5': props.variant === 'multiple', 'gap-1': props.variant === 'single' }"
+  >
     <slot />
-    <UiButton type="submit" :loading="props.pending" class="mt-4 w-min">
+    <UiButton type="submit" :variant="(buttonVariant as ButtonProps['variant'])" :loading="props.pending" :disabled="props.disabled" class="mt-4 w-min">
       {{ props.label }}
     </UiButton>
   </form>

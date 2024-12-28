@@ -6,7 +6,7 @@
     title: "All Apps",
   });
 
-  const { data: apps } = useApi<any>("/apps", {
+  const { data: apps } = await useApi<any>("/apps", {
     method: "GET",
   });
 
@@ -96,6 +96,6 @@
         New App
       </UiButton>
     </div>
-    <VisualTable class="mt-6" v-if="apps" :data="apps" :columns="columns" :show-select="true" />
+    <VisualTable class="mt-6" :data="apps" :columns="columns" :show-select="true" />
   </NuxtLayout>
 </template>
