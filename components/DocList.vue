@@ -46,9 +46,10 @@
         return h(
           resolveComponent("UiBadge"),
           {
-            class: item["attributes.status"] === "published"
-              ? "bg-rose-500/20 text-rose-500 hover:bg-rose-500/20"
-              : "bg-zinc-500/20 text-zinc-500 hover:bg-zinc-500/20",
+            class:
+              item["attributes.status"] === "published"
+                ? "bg-rose-500/20 text-rose-500 hover:bg-rose-500/20"
+                : "bg-zinc-500/20 text-zinc-500 hover:bg-zinc-500/20",
           },
           () => [
             h(resolveComponent("Icon"), {
@@ -77,13 +78,16 @@
   <LayoutHeader level="2">
     <template #title> Docs </template>
 
-    <template #subtitle> Write docs for your app to help users understand how to use it. </template>
-
+    <template #subtitle>
+      <slot name="subtitle"> Write docs for your app to help users understand how to use it. </slot>
+    </template>
     <template #action>
+      <slot name="action">
       <UiButton size="sm" @click="navigateTo(`${props.linkPrefix}/app/${appID}/doc/new`)">
         <Icon name="lucide:plus" class="h-4 w-4" />
         New Doc
       </UiButton>
+      </slot>
     </template>
   </LayoutHeader>
   <VisualTable class="mt-6" :data="docs" flat-data :columns="columns" :show-select="true" />

@@ -1,6 +1,13 @@
 <script setup lang="ts">
+import type { APIDataStructure } from '~/types';
+
   useHead({
     title: "Home",
+  });
+
+  const { data: apps } = await useApi<APIDataStructure[]>("/apps?filter[active]", {
+    method: "GET",
+    fatal: true,
   });
 
   const accordionItems = [
@@ -51,27 +58,12 @@
     <div class="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
       <UiCard
         class="flex justify-center text-center"
-        title="Rosalana"
-        description="a social network focused on creativity and creative expression"
-        icon="custom:rosalana-logo"
-      />
-      <UiCard
-        class="flex justify-center text-center"
-        title="Blueprint"
-        description="a platform focused on facilitating communication between agencies and clients"
-        icon="custom:blueprint-logo"
-      />
-      <UiCard
-        class="flex justify-center text-center"
-        title="ProxyMa"
-        description="a CMS system designed based on a single central administration"
-        icon="custom:proxyma-logo"
-      />
-      <UiCard
-        class="flex justify-center text-center"
-        title="S Transfer"
-        description="a platform that lets you transfer files between devices"
-        icon="custom:transfer-logo"
+        v-for="(app, i) in apps"
+        :key="i"
+        :title="app.attributes.name"
+        :description="app.attributes.description"
+        :icon="app.attributes.icon"
+        @click="navigateTo('/app/' + app.id)"
       />
     </div>
 

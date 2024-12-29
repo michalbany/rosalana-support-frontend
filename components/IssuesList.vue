@@ -5,6 +5,8 @@
     issues: APIDataStructure[];
   }>();
 
+  const appID = useRoute().params.id;
+
   const columns: VTColumn[] = [
     {
       key: "id",
@@ -23,7 +25,16 @@
     <template #title> Issues </template>
 
     <template #subtitle>
-      Issues reported by users. Be sure to fix them as soon as possible.
+      <slot name="subtitle">Issues reported by users. Be sure to fix them as soon as possible.</slot>
+    </template>
+
+    <template #action>
+      <slot name="action">
+        <UiButton size="sm" @click="navigateTo(`/app/${appID}/issue/new`)">
+          <Icon name="lucide:plus" class="h-4 w-4" />
+          New Issue
+        </UiButton>
+      </slot>
     </template>
   </LayoutHeader>
   <VisualTable

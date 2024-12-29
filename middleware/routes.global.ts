@@ -6,6 +6,7 @@ export default defineNuxtRouteMiddleware((to) => {
   const routes: Record<string, Array<() => any>> = {
     "/auth/*": [guest],
     "/admin/*": [auth, admin],
+    "/app/*/issue/new": [auth],
   };
 
   const matchedRoute = Object.keys(routes).find((route) => routeMatch(route, to.path));

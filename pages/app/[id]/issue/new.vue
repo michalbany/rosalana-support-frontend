@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { APIDataStructure } from '~/types';
+  import type { APIDataStructure } from "~/types";
 
   const form = reactive({
     title: "",
@@ -9,29 +9,29 @@ import type { APIDataStructure } from '~/types';
   });
 
   useHead({
-    title: 'Create Doc',
+    title: "Create Issue",
   });
-  
+
   const pending = ref(false);
   const errors = ref<Record<string, string[]>>({});
 
   const submit = async () => {
     pending.value = true;
 
-    const {data, error } = await useApiRuntime<APIDataStructure>('/docs', {
-        method: 'POST',
-        body: JSON.stringify(form),
-        store: false,
-        onResponse: ({ response }) => {
-            useSonner.success(response._data.message);
-        },
+    const { data, error } = await useApiRuntime<APIDataStructure>("/docs", {
+      method: "POST",
+      body: JSON.stringify(form),
+      store: false,
+      onResponse: ({ response }) => {
+        useSonner.success(response._data.message);
+      },
     });
 
     errors.value = error.value;
     pending.value = false;
 
     if (!error.value) {
-        navigateTo('/admin/app/' + form.app_id + '/doc/' + data.value?.id);
+      navigateTo("/admin/app/" + form.app_id + "/doc/" + data.value?.id);
     }
   };
 </script>
