@@ -16,17 +16,20 @@
       <LayoutBannerContent>
         <template #title>{{ app?.attributes.name }}</template>
         <template #description>{{ app?.attributes.description }}</template>
+
+        <div
+          class="flex w-max items-center justify-self-center rounded-md border border-input bg-background px-3"
+        >
+          <Icon name="lucide:search" class="h-4 w-4 text-rose-500" />
+          <UiInput
+            class="border-none text-zinc-800 focus-visible:bg-background dark:text-white dark:focus-visible:bg-background"
+            placeholder="Search"
+            icon="lucide:search"
+            variant="secondary"
+          />
+        </div>
       </LayoutBannerContent>
     </template>
-
-    <UiAlert
-      v-for="(error, i) in app?.attributes.warnings"
-      :key="i"
-      class="p-3"
-      icon="lucide:alert-circle"
-      :description="error"
-      variant="warning"
-    />
 
     <DocList :docs="app?.relationships.docs">
       <template #subtitle> If you need help, you can check the documentation here. </template>
@@ -37,9 +40,7 @@
       </template>
     </DocList>
     <IssuesList :issues="app?.relationships.issues">
-        <template #subtitle>
-            You can create a new issue to ask for help or report a bug.
-        </template>
+      <template #subtitle> You can create a new issue to ask for help or report a bug. </template>
     </IssuesList>
   </NuxtLayout>
 </template>

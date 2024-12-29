@@ -62,13 +62,13 @@
       },
     },
     {
-      key: "created_at",
+      key: "attributes.created_at",
       header: "Created At",
       renderAs: (item) => {
         return h(
           "span",
           { class: "dark:text-zinc-500 text-zinc-400" },
-          useDateFormat(item.created_at, "DD. MMMM  YYYY").value
+          useDateFormat(item['attributes.created_at'], "DD. MMMM  YYYY").value
         );
       },
     },
