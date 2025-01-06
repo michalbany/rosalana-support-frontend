@@ -32,7 +32,7 @@ import type { APIDataStructure } from '~/types';
 </script>
 <template>
   <NuxtLayout name="main">
-    <LayoutHeader level="1" :logo="app?.attributes.icon">
+    <LayoutHeader level="1" :logo="app?.attributes.icon" :to="`/admin/app/${app?.id}`">
       <template #title>
         {{ app?.attributes.name }}
       </template>
