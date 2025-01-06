@@ -1,4 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import type {BundledLanguage} from 'shiki'
+import type {LanguageRegistration} from 'shiki'
 export default defineNuxtConfig({
   compatibilityDate: "2024-11-01",
   devtools: { enabled: true },
@@ -31,11 +33,8 @@ export default defineNuxtConfig({
       },
     },
     highlight: {
+      langs: ['js','jsx','json','ts','tsx','vue','css','html','bash','md','mdc','yaml', 'php', 'sql', 'python'],
       highlighter: "shiki",
-      // theme: "snazzy-light",
-      // theme: "everforest-light",
-      // theme: "everforest-light",
-      // theme: "poimandres",
       theme: "material-theme-lighter",
     },
   },
